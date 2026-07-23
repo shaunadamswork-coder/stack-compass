@@ -1,0 +1,14 @@
+---
+// Affiliate CTA. Always links to an internal /go/<program>/ redirector page —
+// never directly to a vendor URL. rel="sponsored nofollow" per FTC/affiliate guidance.
+export interface Props {
+  program: 'systeme-io' | 'gohighlevel' | 'getresponse' | 'kit' | 'brevo' | 'semrush';
+  label: string;
+  name: string; // display name for the caption, e.g. "Systeme.io"
+}
+const { program, label, name } = Astro.props;
+---
+<div class="cta-block">
+  <a class="btn" href={`/go/${program}/`} rel="sponsored nofollow">{label}</a>
+  <p class="cta-disclosure">This is an affiliate link to {name}. We may earn a commission at no extra cost to you — see our <a href="/disclosure/">disclosure</a>.</p>
+</div>

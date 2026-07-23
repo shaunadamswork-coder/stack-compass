@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaButton from '../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../config';
+
+const SLUG = '/brevo/';
+
+// Program-economics figures below are carried from the already-verified
+// COMPLIANCE_REGISTER.md Brevo entry — documentation voice only (no firsthand
+// "we use/tested" claims on file for this program). The CPA dollar amount is
+// NOT disclosed on any official Brevo page, so it is described qualitatively
+// ("a fixed bounty, amount set by the program") rather than as a number.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Brevo: Affordable Email Marketing (2026 Program Terms)",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Brevo', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is Brevo?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brevo (formerly Sendinblue) is an email marketing platform with a free entry tier, positioned as a lower-cost alternative to premium all-in-one marketing-stack tools for readers who don't need or want to buy a full CRM/funnel/automation suite (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Brevo's affiliate commission work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brevo pays a fixed bounty (amount set by the program, not publicly disclosed) per paid subscription, plus $5 per free-account signup. The $5 free-signup payout only unlocks after the affiliate's first paid referral (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is Brevo's cookie window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brevo uses a 90-day cookie that resets on each new click, meaning the attribution window restarts every time the same visitor clicks the link again (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does StackCompass disclose the exact dollar amount of Brevo's paid-subscription bounty?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Brevo does not publish the paid-subscription CPA dollar amount on any official page, so this site does not state a figure for it. Only the $5 free-signup payout is a disclosed, fixed number (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What network does Brevo's affiliate program run through?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Brevo's affiliate program runs via PartnerStack or Tapfiliate, depending on how an affiliate applies and is onboarded (verified 2026-07-22)."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="Brevo: Affordable Email Marketing (2026)"
+  description="Brevo's affiliate program terms, verified 2026-07-22: fixed paid-subscription bounty, $5 free-signup payout, 90-day cookie. Positioned as a low-cost entry point, not a GoHighLevel substitute."
+  jsonLd={jsonLd}
+  activeNav=""
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>Brevo: Affordable Email Marketing</h1>
+
+  <div class="lede">
+    <p>Brevo (formerly Sendinblue) is an email marketing platform with a free tier, useful as a low-cost or free entry point for readers who are not ready to buy a premium all-in-one marketing-stack tool. Its affiliate program pays a fixed bounty (amount set by the program, not publicly disclosed) per paid subscription, plus $5 per free-account signup — though the $5 free-signup payout only unlocks after the affiliate's first paid referral (verified 2026-07-22). Tracking runs on a 90-day cookie that resets on each new click, via PartnerStack or Tapfiliate (verified 2026-07-22).</p>
+  </div>
+
+  <div class="cta-block">
+    <CtaButton program="brevo" label="Check out Brevo →" name="Brevo" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Term</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Paid-subscription commission</td>
+          <td>A fixed bounty (amount set by the program) per paid subscription. The dollar figure is not disclosed on any official Brevo page, so it is not stated as a number on this site (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Free-signup payout</td>
+          <td>$5 per free-account signup — this payout only unlocks after the affiliate's first paid referral (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Cookie</td>
+          <td>90-day cookie, and it resets with each new click rather than staying fixed from the first click (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Network</td>
+          <td>PartnerStack or Tapfiliate, depending on program onboarding (verified 2026-07-22)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.85rem;color:#52606d;">Commission rate, payout unlock conditions, and cookie mechanics are contractual program terms, not income guarantees. Actual affiliate earnings depend on referral volume, retention, and terms that can change without notice.</p>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>Brevo tends to fit:</strong></p>
+  <ul>
+    <li>Readers who want to start with a free email-marketing tier rather than committing to a paid, premium all-in-one platform</li>
+    <li>Budget-conscious solo creators or small businesses whose main need is email marketing, not a full CRM/funnel/automation stack</li>
+    <li>Audiences looking for a lower-cost complement to, or stepping stone before, a larger platform like GoHighLevel</li>
+  </ul>
+  <p><strong>Brevo tends to be a weaker fit for:</strong></p>
+  <ul>
+    <li>Agencies or businesses that need a single platform combining CRM, funnels, SMS, scheduling, and email under one subscription — see our <a href="/gohighlevel-pricing/">GoHighLevel pricing</a> page for that use case</li>
+    <li>Readers expecting a specific commission dollar figure for the paid-subscription bounty — Brevo does not publish that amount, so this page does not state one</li>
+    <li>Anyone expecting an earnings projection from promoting Brevo — this page describes program mechanics, not expected income</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>What is Brevo?</h3>
+    <p>Brevo (formerly Sendinblue) is an email marketing platform with a free entry tier, positioned here as a lower-cost alternative for readers who don't need or want to buy a full CRM/funnel/automation suite (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>How does Brevo's affiliate commission work?</h3>
+    <p>Brevo pays a fixed bounty (amount set by the program, not publicly disclosed) per paid subscription, plus $5 per free-account signup. The $5 free-signup payout only unlocks after the affiliate's first paid referral (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>What is Brevo's cookie window?</h3>
+    <p>Brevo uses a 90-day cookie that resets on each new click, so the attribution window restarts whenever the same visitor clicks the link again (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does StackCompass disclose the exact dollar amount of Brevo's paid-subscription bounty?</h3>
+    <p>No. Brevo does not publish that dollar amount on any official page, so this site does not state a figure for it. Only the $5 free-signup payout is a disclosed, fixed number (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>What network does Brevo's affiliate program run through?</h3>
+    <p>Brevo's affiliate program runs via PartnerStack or Tapfiliate, depending on how an affiliate applies and is onboarded (verified 2026-07-22).</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/gohighlevel-pricing/">GoHighLevel pricing: verified plans, costs, and affiliate economics</a></li>
+    <li><a href="/tools/stack-cost-calculator/">Marketing stack cost calculator</a></li>
+  </ul>
+</Layout>

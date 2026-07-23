@@ -1,0 +1,168 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaButton from '../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../config';
+
+const SLUG = '/semrush/';
+
+// Program-economics figures below are carried from the already-verified
+// COMPLIANCE_REGISTER.md Semrush entry — documentation voice only. Semrush
+// gates affiliate-program approval on an audience threshold (~1,000 monthly
+// visitors or social followers) that this site has not yet met, so this page
+// is explicit that our own tracked link is pending, not currently earning.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Semrush for SEO (2026): Program Terms and Link Status",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Semrush', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much does Semrush's affiliate program pay?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Semrush pays up to $200 per sale on its SEO Toolkit product, plus $10 per trial signup, via the Impact network, on a 120-day last-click cookie (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does StackCompass currently earn a commission from Semrush?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Semrush requires an established audience — approximately 1,000 monthly visitors or social followers — before approving a new affiliate. This site has not yet met that threshold, so our tracked Semrush link is pending, and this page does not imply current earnings from Semrush."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I click the Semrush link on this site right now?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It routes to an internal status page that discloses the link is pending and does not carry a tracking code. Once StackCompass is approved into Semrush's affiliate program, that page will switch to a live, disclosed affiliate link."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What network does Semrush's affiliate program use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Semrush's affiliate program runs via Impact (verified 2026-07-22)."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="Semrush for SEO (2026): Program Terms & Link Status"
+  description="Semrush's affiliate program terms, verified 2026-07-22: up to $200 per SEO Toolkit sale, $10 per trial, 120-day cookie via Impact. StackCompass's own affiliate link is pending an audience-threshold requirement."
+  jsonLd={jsonLd}
+  activeNav=""
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>Semrush for SEO</h1>
+
+  <div class="lede">
+    <p>Semrush is an SEO research and toolkit platform. Its affiliate program pays up to $200 per sale on the SEO Toolkit product, plus $10 per trial signup, tracked on a 120-day last-click cookie via the Impact network (verified 2026-07-22). Semrush requires an affiliate to already have an established audience — roughly 1,000 monthly visitors or social followers — before approving an application, and StackCompass has not yet met that threshold. <strong>Our own Semrush affiliate link is pending</strong>; this page does not imply StackCompass currently earns anything from Semrush.</p>
+  </div>
+
+  <div class="callout amber">
+    <p><strong>Link status: pending.</strong> The button below points to our internal <code>/go/semrush/</code> status page, which currently shows an "affiliate link pending" notice rather than a live tracking link, because Semrush has not yet approved this site into its affiliate program.</p>
+  </div>
+
+  <div class="cta-block">
+    <CtaButton program="semrush" label="Semrush link status →" name="Semrush" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Term</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>SEO Toolkit sale commission</td>
+          <td>Up to $200 per sale (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Trial commission</td>
+          <td>$10 per trial signup (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Cookie</td>
+          <td>120-day, last-click (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Network</td>
+          <td>Impact (verified 2026-07-22)</td>
+        </tr>
+        <tr>
+          <td>Program eligibility</td>
+          <td>Requires an established audience (approximately 1,000 monthly visitors or social followers) before approval (verified 2026-07-22). StackCompass does not yet meet this threshold.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.85rem;color:#52606d;">Commission rate, cookie window, and eligibility requirements are contractual program terms, not income guarantees. Actual affiliate earnings depend on referral volume, approval status, and terms that can change without notice.</p>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>Semrush tends to fit:</strong></p>
+  <ul>
+    <li>Readers who want a dedicated SEO research and keyword-tracking toolkit, separate from a marketing-automation or CRM stack</li>
+    <li>Content creators and agencies evaluating SEO tooling to pair with their existing email/CRM/funnel setup</li>
+  </ul>
+  <p><strong>Semrush tends to be a weaker fit for:</strong></p>
+  <ul>
+    <li>Readers looking for an all-in-one CRM/funnel/email platform — see our <a href="/gohighlevel-pricing/">GoHighLevel pricing</a> page for that use case instead</li>
+    <li>Anyone expecting this site to currently earn (or disclose earning) a commission from Semrush — it does not yet, because our program application is not yet eligible</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>How much does Semrush's affiliate program pay?</h3>
+    <p>Semrush pays up to $200 per sale on its SEO Toolkit product, plus $10 per trial signup, via the Impact network, on a 120-day last-click cookie (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does StackCompass currently earn a commission from Semrush?</h3>
+    <p>No. Semrush requires an established audience — approximately 1,000 monthly visitors or social followers — before approving a new affiliate, and this site has not yet met that threshold. Our tracked Semrush link is pending; this page does not imply current earnings from Semrush.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What happens if I click the Semrush link on this site right now?</h3>
+    <p>It routes to an internal status page that discloses the link is pending and carries no tracking code. Once StackCompass is approved into Semrush's affiliate program, that page will switch to a live, disclosed affiliate link.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What network does Semrush's affiliate program use?</h3>
+    <p>Semrush's affiliate program runs via Impact (verified 2026-07-22).</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/brevo/">Brevo: affordable email marketing</a></li>
+    <li><a href="/tools/stack-cost-calculator/">Marketing stack cost calculator</a></li>
+  </ul>
+</Layout>

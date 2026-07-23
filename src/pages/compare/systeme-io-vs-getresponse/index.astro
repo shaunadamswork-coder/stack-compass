@@ -1,0 +1,191 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/compare/systeme-io-vs-getresponse/';
+
+// JSON-LD originally authored in /20_content/spokes/systemeio-vs-getresponse.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Systeme.io vs. GetResponse: Affiliate Program Comparison for Creators",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Systeme.io vs. GetResponse', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which pays more, Systeme.io or GetResponse?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on volume and time horizon. Systeme.io's flat 60% recurring (verified 2026-07-22) doesn't taper, while GetResponse only reaches 60% at its highest volume tier and caps payout at 12 months per referral (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Systeme.io's commission really lifetime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Systeme.io's verified terms describe a 1-year attribution window (verified 2026-07-22), not a lifetime guarantee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does GetResponse's capped at 12 months mean?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For each referral, GetResponse pays its tiered 40 to 60 percent commission for up to 12 months from that referral's start date, after which payout on that referral ends (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which platform is easier to start promoting?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Systeme.io's free plan lowers the barrier to trying the product before committing. GetResponse does not have a comparable free tier referenced here."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do both programs use the same tracking network?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GetResponse runs through PartnerStack (verified 2026-07-22). Systeme.io's program is vendor-direct."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Should a comparison site promote both?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Many operators promote both since they serve different reader intents. Both relationships should be disclosed clearly, and audience fit should drive the recommendation rather than commission rate alone."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="Systeme.io vs. GetResponse"
+  description="Affiliate program comparison for creators: commission structure, cookie window, and network for Systeme.io and GetResponse — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="compare"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>Systeme.io vs. GetResponse: Affiliate Program Comparison for Creators</h1>
+
+  <div class="lede">
+    <p>Systeme.io pays a flat 60% recurring commission with a 1-year attribution window (verified 2026-07-22), while GetResponse pays a tiered 40% → 50% → 60% recurring commission capped at 12 months per referral (verified 2026-07-22). Systeme.io is generally simpler to promote because of its free plan and single flat rate; GetResponse rewards affiliates who can drive consistent volume with a rising percentage, but that same referral stops earning after 12 months regardless of how long the customer stays subscribed. Neither program is a strict upgrade over the other — the better fit depends on whether your audience wants a beginner-friendly all-in-one tool or a more established email-marketing platform.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+    <CtaButton program="systeme-io" label="Try Systeme.io →" name="Systeme.io" />
+    <CtaButton program="getresponse" label="Try GetResponse →" name="GetResponse" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th></th><th>Systeme.io</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Commission</td><td>60% recurring (verified 2026-07-22)</td><td>40% → 50% → 60% recurring, tiered by volume (verified 2026-07-22)</td></tr>
+        <tr><td>Cap / window</td><td>1-year attribution window (verified 2026-07-22) — not "lifetime"</td><td>Capped at 12 months per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>Not separately published beyond the attribution window above</td><td>90-day cookie (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor-direct</td><td>PartnerStack</td></tr>
+        <tr><td>Plan structure</td><td>Freemium (free plan plus paid tiers)</td><td>Paid plans (no free tier referenced here)</td></tr>
+        <tr><td>Plan pricing</td><td><span class="todo">Systeme.io plan price — verify before publish</span></td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This comparison is for:</strong></p>
+  <ul>
+    <li>Creators writing about beginner-friendly, all-in-one marketing tools versus established email platforms</li>
+    <li>Solopreneurs choosing between the two for their own funnel/email stack</li>
+    <li>Affiliate marketers deciding which program's payout structure better fits their traffic and audience intent</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers looking for enterprise email-infrastructure comparisons — both tools target creators and small businesses</li>
+    <li>Anyone expecting identical commission mechanics between the two — they measure "duration" differently (a 1-year attribution window vs. a 12-month payout cap), which is explained below and shouldn't be flattened into a single number</li>
+  </ul>
+
+  <h2>Comparison</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Systeme.io</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core product focus</td><td>All-in-one funnels, email, courses, and CRM</td><td>Email marketing and automation, with funnel features</td></tr>
+        <tr><td>Commission structure</td><td>Flat 60% recurring (verified 2026-07-22)</td><td>Tiered 40% → 50% → 60% recurring (verified 2026-07-22)</td></tr>
+        <tr><td>Duration mechanic</td><td>1-year attribution window per referral (verified 2026-07-22)</td><td>12-month payout cap per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>Not separately specified here</td><td>90-day cookie (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor-direct</td><td>PartnerStack</td></tr>
+        <tr><td>Entry price point</td><td>Freemium</td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+        <tr><td>Best-fit audience</td><td>Budget-conscious beginners wanting one tool for everything</td><td>Creators who already value email deliverability and automation maturity</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Which pays more, Systeme.io or GetResponse?</h3>
+    <p>It depends on volume and time horizon. Systeme.io's flat 60% recurring (verified 2026-07-22) doesn't taper. GetResponse only reaches 60% at its highest volume tier, and even then the recurring commission on any single referral is capped at 12 months (verified 2026-07-22) — so a Systeme.io referral could out-earn a GetResponse referral over time even at the same nominal top rate.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Systeme.io's commission really "lifetime"?</h3>
+    <p>No — that's a common but inaccurate claim, and this page avoids it. Systeme.io's verified terms describe a 1-year attribution window (verified 2026-07-22), not a lifetime guarantee. Use "1-year attribution window," not "lifetime commissions."</p>
+  </div>
+  <div class="faq-item">
+    <h3>What does GetResponse's "capped at 12 months" actually mean?</h3>
+    <p>For each individual referral, GetResponse pays the applicable tiered commission (40–60%) for up to 12 months from that referral's start date, after which commission on that specific referral ends (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which platform is easier to start promoting?</h3>
+    <p>Systeme.io's free plan lowers the barrier for readers to try the product before committing, which can make it easier to convert. GetResponse doesn't have a comparable free tier referenced here, so its funnel typically starts with a paid trial or demo.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do both programs use the same tracking network?</h3>
+    <p>No. GetResponse runs through PartnerStack (verified 2026-07-22). Systeme.io's program is vendor-direct.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Should a comparison site promote both?</h3>
+    <p>Many operators do, since the two tools serve different reader intents — an all-in-one beginner tool versus an established email platform. There's no rule against running both, but disclose both relationships clearly and let audience fit, not commission rate alone, drive the recommendation.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/alternatives/gohighlevel/">Looking for a multi-client agency tool instead? See GoHighLevel alternatives</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

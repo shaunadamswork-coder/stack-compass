@@ -1,0 +1,185 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import CtaButton from '../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../config';
+
+const SLUG = '/gohighlevel-pricing/';
+
+// Plan prices below were fetched directly from https://www.gohighlevel.com/pricing
+// on 2026-07-22 (LAST_VERIFIED_DATE) and are tagged inline in the page copy.
+// Affiliate-economics figures (commission, cookie, qualification window) are
+// carried from the already-verified COMPLIANCE_REGISTER.md GoHighLevel entry —
+// same verification date, same "documentation voice only" rule (no firsthand
+// "we use/tested" claims on file for this program).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "GoHighLevel Pricing (2026): Verified Plans, Costs, and Affiliate Program Economics",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'GoHighLevel Pricing', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is GoHighLevel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel (also written HighLevel) is an all-in-one CRM, funnel-and-website builder, and marketing-automation platform built primarily for agencies that manage multiple client accounts under one white-label brand. Its core feature set covers CRM and pipelines, funnel/website building, email and SMS marketing, calling, workflow automation, booking calendars, reputation management, and client sub-account management (verified 2026-07-22, gohighlevel.com/pricing)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How much does GoHighLevel cost?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "As of 2026-07-22, GoHighLevel publishes three self-serve monthly plans: Starter at $97/month, Unlimited at $297/month, and Agency Pro at $497/month, each with a discounted annual option, plus a custom-quoted Enterprise plan with no published price (verified 2026-07-22, gohighlevel.com/pricing). Usage-based charges for phone numbers, SMS, email sending, and premium AI features apply on top of the plan price and are not included in the monthly figures above."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is GoHighLevel worth it?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whether GoHighLevel is worth its price depends on whether the buyer needs its core use case: managing multiple client sub-accounts under one white-label brand, or reselling it as a SaaS product. For agencies with that need, consolidating several point tools (CRM, funnel builder, email, SMS, scheduling) into one $97-$497/month subscription can be favorable to running separate subscriptions for each function. For a solo creator or single-business owner without multi-client or white-label needs, a narrower, lower-cost tool may cover the same use case at a lower monthly cost. This is a fit assessment, not an earnings or savings guarantee."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does GoHighLevel compare to cheaper alternatives?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel's least expensive self-serve plan (Starter, $97/month, verified 2026-07-22) starts higher than freemium or low-cost entry points offered by some single-purpose competitors, such as Systeme.io's free tier. The trade-off is scope: GoHighLevel bundles CRM, funnels, email/SMS, and white-label multi-client management in one subscription, while cheaper alternatives typically cover a narrower slice (for example, email and funnels only) and may require stacking multiple tools to match GoHighLevel's full feature set. See our GoHighLevel alternatives page for a direct comparison on affiliate-program terms and feature fit."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="GoHighLevel Pricing (2026): Verified Plans & Costs"
+  description="GoHighLevel's current plan prices, verified directly from gohighlevel.com/pricing on 2026-07-22, plus the already-verified affiliate-program economics for this site's GoHighLevel link."
+  jsonLd={jsonLd}
+  activeNav="ghl-pricing"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>GoHighLevel Pricing (2026): Verified Plans, Costs, and Affiliate Economics</h1>
+
+  <div class="lede">
+    <p>As of 2026-07-22, GoHighLevel's three self-serve monthly plans are Starter at $97/month, Unlimited at $297/month, and Agency Pro at $497/month, each also offered at a discounted annual rate; a custom-quoted Enterprise plan sits above those with no published price (verified 2026-07-22, gohighlevel.com/pricing). All plans include unlimited contacts and unlimited users; what changes between tiers is primarily the number of client sub-accounts, API access level, and whether "SaaS Mode" reselling is included. Usage-based charges for phone, SMS, email, and premium AI features apply separately from the plan price on every tier.</p>
+  </div>
+
+  <div class="cta-block">
+    <CtaButton program="gohighlevel" label="Start a GoHighLevel free trial →" name="GoHighLevel" />
+  </div>
+
+  <h2>Verified plan-price table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Plan</th><th>Monthly price (verified 2026-07-22, gohighlevel.com/pricing)</th><th>Who it's for</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Starter</td>
+          <td>$97/month ($970/year annual option) (verified 2026-07-22)</td>
+          <td>Solo marketers and smaller businesses; includes 3 client sub-accounts, unlimited contacts/users, and core features</td>
+        </tr>
+        <tr>
+          <td>Unlimited</td>
+          <td>$297/month ($2,970/year annual option) (verified 2026-07-22)</td>
+          <td>Growing agencies; adds unlimited sub-accounts, no-markup phone/email rebilling, and basic API access</td>
+        </tr>
+        <tr>
+          <td>Agency Pro</td>
+          <td>$497/month ($4,970/year annual option) (verified 2026-07-22)</td>
+          <td>Agencies and "SaaSpreneurs" reselling GoHighLevel as their own product; adds SaaS Mode, automated sub-account creation, marked-up rebilling, and advanced API access</td>
+        </tr>
+        <tr>
+          <td>Enterprise</td>
+          <td>Custom quote — no price published on the official pricing page (verified 2026-07-22)</td>
+          <td>High-volume agencies needing a dedicated Customer Success Manager, custom development, and enterprise reporting; requires speaking with GoHighLevel's sales team</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size:0.85rem;color:#52606d;">All four tiers offer a 14-day free trial and month-to-month billing with no long-term contract (verified 2026-07-22, gohighlevel.com/pricing). Usage-based telecom/AI fees are billed separately and are not included in the figures above.</p>
+
+  <h2>Affiliate-program economics (already-verified figures)</h2>
+  <p>These terms come from <code>COMPLIANCE_REGISTER.md</code>'s existing, source-checked GoHighLevel entry, not from the pricing page above — they describe what StackCompass may earn if you sign up through our link, not what GoHighLevel charges you.</p>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Term</th><th>Detail</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Base commission</td><td>40% recurring on the referred subscription (verified 2026-07-22)</td></tr>
+        <tr><td>Second-tier override</td><td>Additional 5%, but this tier requires HighLevel's approval — it is not automatic (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day, last-click attribution (verified 2026-07-22)</td></tr>
+        <tr><td>Qualification window</td><td>A referral must stay active and in good standing for 45 consecutive days before its commission qualifies for payout (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor/partner program, vendor-direct (not PartnerStack) (verified 2026-07-22)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Commission rate, cookie window, and qualification period are contractual program terms, not income guarantees. Actual affiliate earnings depend on referral volume, customer retention, and terms that can change without notice.</p>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>GoHighLevel tends to fit:</strong></p>
+  <ul>
+    <li>Agencies managing multiple client accounts who want white-label CRM, funnel, and communication tools under one subscription</li>
+    <li>Operators planning to resell GoHighLevel access as their own branded SaaS product (Agency Pro's SaaS Mode)</li>
+    <li>Teams currently paying for several separate tools (CRM + funnel builder + email/SMS + scheduling) who want to consolidate into one platform</li>
+  </ul>
+  <p><strong>GoHighLevel tends to be a weaker fit for:</strong></p>
+  <ul>
+    <li>Solo creators or single-business owners who don't need multi-client sub-accounts or white-label branding — a narrower, lower-cost tool may cover the same need for less</li>
+    <li>Buyers who want a fully inclusive flat price — usage-based telecom and AI charges apply on top of every plan</li>
+    <li>Anyone expecting a specific savings or earnings outcome from switching — this page describes list prices and program terms, not projected results</li>
+  </ul>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>What is GoHighLevel?</h3>
+    <p>GoHighLevel (also written HighLevel) is an all-in-one CRM, funnel-and-website builder, and marketing-automation platform built primarily for agencies managing multiple client accounts under one white-label brand. Its feature set spans CRM and pipelines, funnel/website building, email and SMS marketing, calling, workflow automation, booking calendars, reputation management, and client sub-account management (verified 2026-07-22, gohighlevel.com/pricing).</p>
+  </div>
+  <div class="faq-item">
+    <h3>How much does GoHighLevel cost?</h3>
+    <p>As of 2026-07-22, GoHighLevel's published self-serve plans are Starter at $97/month, Unlimited at $297/month, and Agency Pro at $497/month, each with a discounted annual option, plus a custom-quoted Enterprise plan with no published price (verified 2026-07-22, gohighlevel.com/pricing). Usage-based charges for phone numbers, SMS, email sending, and premium AI features are billed separately from the plan price.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is GoHighLevel worth it?</h3>
+    <p>That depends on fit. For agencies that need multi-client, white-label sub-accounts or plan to resell the platform as their own SaaS product, consolidating several point tools into one $97-$497/month subscription can be favorable to running separate subscriptions for each function. For a solo creator or single-business owner without those needs, a narrower, lower-cost tool may cover the same use case for less. This is a fit assessment, not an earnings or cost-savings guarantee.</p>
+  </div>
+  <div class="faq-item">
+    <h3>How does GoHighLevel compare to cheaper alternatives?</h3>
+    <p>GoHighLevel's least expensive self-serve plan (Starter, $97/month, verified 2026-07-22) starts above the free or low-cost entry points offered by some narrower competitors, such as Systeme.io's free tier. The trade-off is scope — GoHighLevel bundles CRM, funnels, email/SMS, and white-label multi-client management into one subscription, where cheaper alternatives typically cover a narrower slice and may require stacking multiple tools to match the same feature set. See our <a href="/alternatives/gohighlevel/">GoHighLevel alternatives</a> page for a direct comparison on affiliate-program terms and feature fit.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/alternatives/gohighlevel/">GoHighLevel alternatives for creators and agencies</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

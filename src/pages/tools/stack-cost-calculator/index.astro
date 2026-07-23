@@ -1,0 +1,256 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+---
+<Layout
+  title="Marketing Stack Cost Calculator"
+  description="Enter what you currently pay for email, CRM, funnels, scheduling, SMS, and course hosting, and compare your total to GoHighLevel's published plan prices (verified 2026-07-22). Runs entirely in your browser — nothing is saved."
+  activeNav=""
+  slug="/tools/stack-cost-calculator/"
+  ogType="website"
+>
+  <h1>Marketing Stack Cost Calculator</h1>
+
+  <div class="lede">
+    <p>Enter what <strong>you</strong> currently pay each month for the marketing functions you actually use. This tool adds up only the numbers you type in and compares that total to GoHighLevel's own published plan prices. It runs entirely in your browser — nothing is saved, uploaded, or remembered between visits (no cookies, no local storage). Leave any field at 0 if you don't pay for that function separately.</p>
+  </div>
+
+  <div class="callout" id="how-it-works">
+    <p><strong>How this works (not a black box):</strong> the calculator sums the six numbers you enter below into "your current stack total," then subtracts each of GoHighLevel's three published monthly plan prices — Starter ($97), Unlimited ($297), Agency Pro ($497) (verified 2026-07-22, gohighlevel.com/pricing) — from that total to show the difference. It does not look up, assume, or hardcode a price for any tool other than GoHighLevel; every non-GoHighLevel number on this page came from your own input.</p>
+  </div>
+
+  <form id="calc-form">
+    <div class="calc-grid">
+      <div class="calc-field">
+        <label for="spend-email">Email marketing ($/month)</label>
+        <input type="number" id="spend-email" name="spend-email" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+      <div class="calc-field">
+        <label for="spend-crm">CRM / pipeline ($/month)</label>
+        <input type="number" id="spend-crm" name="spend-crm" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+      <div class="calc-field">
+        <label for="spend-funnel">Funnel / website builder ($/month)</label>
+        <input type="number" id="spend-funnel" name="spend-funnel" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+      <div class="calc-field">
+        <label for="spend-scheduling">Scheduling / calendar ($/month)</label>
+        <input type="number" id="spend-scheduling" name="spend-scheduling" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+      <div class="calc-field">
+        <label for="spend-sms">SMS ($/month)</label>
+        <input type="number" id="spend-sms" name="spend-sms" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+      <div class="calc-field">
+        <label for="spend-course">Course hosting ($/month)</label>
+        <input type="number" id="spend-course" name="spend-course" min="0" step="1" inputmode="decimal" value="0" aria-describedby="calc-hint" />
+      </div>
+    </div>
+    <p id="calc-hint" style="font-size:0.85rem;color:#52606d;">Enter what you pay today for each function. Leave at 0 if you don't use or don't pay separately for that function.</p>
+  </form>
+
+  <p aria-live="polite" id="running-total">Your current stack total so far: <strong>$0/month</strong></p>
+
+  <p>
+    <button id="compare-btn" class="btn" type="button">Compare to GoHighLevel →</button>
+    <button id="reset-btn" class="btn secondary" type="button">Reset calculator</button>
+  </p>
+
+  <div id="result" hidden aria-live="polite" tabindex="-1">
+    <h2>Your comparison</h2>
+    <p id="result-summary" class="lede" style="border-left-color:var(--teal);"></p>
+
+    <div class="table-scroll">
+      <table>
+        <thead>
+          <tr><th>GoHighLevel plan</th><th>Monthly price (verified 2026-07-22, gohighlevel.com/pricing)</th><th>Difference vs. your stack total</th></tr>
+        </thead>
+        <tbody id="result-tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="callout amber">
+      <p><strong>Honest note:</strong> This is an estimate based on the figures you enter and GoHighLevel's published prices; usage-based charges (phone, email, AI) are extra and not included — not a savings guarantee. GoHighLevel's published feature set spans CRM, funnels, email/SMS, scheduling, and client sub-account management; it does not explicitly list course/membership hosting as a core feature (verified 2026-07-22, gohighlevel.com/pricing), so if course hosting is a large part of your total, confirm that specific need against GoHighLevel's current feature list before assuming full consolidation.</p>
+    </div>
+
+    <div class="cta-block">
+      <CtaButton program="gohighlevel" label="See GoHighLevel plans →" name="GoHighLevel" />
+    </div>
+  </div>
+
+  <p style="margin-top:2rem;"><a href="/gohighlevel-pricing/">See the full GoHighLevel pricing breakdown →</a></p>
+  <p><a href="/">← Back to the full comparison hub</a></p>
+
+  <style>
+    .calc-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.9rem;
+      margin-bottom: 0.25rem;
+    }
+    .calc-field {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.75rem 0.9rem;
+    }
+    .calc-field label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.92rem;
+      margin-bottom: 0.4rem;
+      color: var(--slate);
+    }
+    .calc-field input[type="number"] {
+      width: 100%;
+      font-size: 1rem;
+      font-family: inherit;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      background: var(--bg);
+      color: var(--ink);
+    }
+    .calc-field input[type="number"]:focus {
+      outline: 2px solid var(--teal);
+      outline-offset: 1px;
+    }
+    #running-total { font-size: 1.05rem; margin: 1rem 0; }
+    #result { margin-top: 1.5rem; }
+
+    @media (min-width: 640px) {
+      .calc-grid { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+
+  <script>
+    // In-memory only — intentionally NOT persisted to localStorage /
+    // sessionStorage / cookies. Reloading or leaving the page discards
+    // every number entered here. No competitor price is ever hardcoded:
+    // the only numbers this script asserts as fact are GoHighLevel's own
+    // published plan prices; every other figure comes from user input.
+
+    interface GhlTier {
+      name: string;
+      price: number;
+    }
+
+    // GoHighLevel's three self-serve monthly plan prices, verified 2026-07-22
+    // directly against gohighlevel.com/pricing (same source as /gohighlevel-pricing/).
+    const GHL_TIERS: GhlTier[] = [
+      { name: 'Starter', price: 97 },
+      { name: 'Unlimited', price: 297 },
+      { name: 'Agency Pro', price: 497 },
+    ];
+
+    const fieldIds = [
+      'spend-email',
+      'spend-crm',
+      'spend-funnel',
+      'spend-scheduling',
+      'spend-sms',
+      'spend-course',
+    ] as const;
+
+    const inputs = fieldIds.map((id) => document.getElementById(id) as HTMLInputElement);
+    const runningTotalEl = document.getElementById('running-total') as HTMLParagraphElement;
+    const compareBtn = document.getElementById('compare-btn') as HTMLButtonElement;
+    const resetBtn = document.getElementById('reset-btn') as HTMLButtonElement;
+    const resultBox = document.getElementById('result') as HTMLDivElement;
+    const resultSummary = document.getElementById('result-summary') as HTMLParagraphElement;
+    const resultTbody = document.getElementById('result-tbody') as HTMLTableSectionElement;
+
+    function formatMoney(n: number): string {
+      const rounded = Math.round(n * 100) / 100;
+      return `$${rounded.toLocaleString('en-US', { maximumFractionDigits: 2 })}`;
+    }
+
+    function readValue(input: HTMLInputElement): number {
+      const raw = parseFloat(input.value);
+      if (Number.isNaN(raw) || raw < 0) return 0;
+      return raw;
+    }
+
+    function currentTotal(): number {
+      return inputs.reduce((sum, input) => sum + readValue(input), 0);
+    }
+
+    function updateRunningTotal() {
+      const total = currentTotal();
+      runningTotalEl.innerHTML = `Your current stack total so far: <strong>${formatMoney(total)}/month</strong>`;
+    }
+
+    inputs.forEach((input) => {
+      input.addEventListener('input', updateRunningTotal);
+    });
+
+    compareBtn.addEventListener('click', () => {
+      const total = currentTotal();
+
+      // The cheapest GoHighLevel tier is Starter — all three published tiers
+      // include the same core feature set (CRM, funnels, email/SMS,
+      // scheduling); higher tiers add sub-account count, API access, and
+      // SaaS-mode reselling rather than additional core functionality
+      // (verified 2026-07-22, gohighlevel.com/pricing). So Starter is the
+      // cheapest tier that could plausibly replace a stack built only from
+      // the six functions asked about above.
+      const cheapestTier = GHL_TIERS[0];
+      const diffVsCheapest = total - cheapestTier.price;
+
+      if (total === 0) {
+        resultSummary.textContent = `You entered $0/month across every field. Enter your actual current spend above to see a real comparison — GoHighLevel's cheapest published plan (${cheapestTier.name}) is ${formatMoney(cheapestTier.price)}/month.`;
+      } else if (diffVsCheapest > 0) {
+        resultSummary.textContent = `Your entered stack total is ${formatMoney(total)}/month. GoHighLevel's cheapest published plan (${cheapestTier.name}, ${formatMoney(cheapestTier.price)}/month) is ${formatMoney(diffVsCheapest)}/month less than that total, based only on the figures you entered.`;
+      } else if (diffVsCheapest < 0) {
+        resultSummary.textContent = `Your entered stack total is ${formatMoney(total)}/month. GoHighLevel's cheapest published plan (${cheapestTier.name}, ${formatMoney(cheapestTier.price)}/month) costs ${formatMoney(Math.abs(diffVsCheapest))}/month more than that total, based only on the figures you entered.`;
+      } else {
+        resultSummary.textContent = `Your entered stack total is ${formatMoney(total)}/month, which matches GoHighLevel's cheapest published plan (${cheapestTier.name}, ${formatMoney(cheapestTier.price)}/month) exactly.`;
+      }
+
+      resultTbody.replaceChildren();
+      GHL_TIERS.forEach((tier) => {
+        const diff = total - tier.price;
+        const tr = document.createElement('tr');
+
+        const nameTd = document.createElement('td');
+        nameTd.textContent = tier.name + (tier === cheapestTier ? ' (cheapest tier)' : '');
+        tr.appendChild(nameTd);
+
+        const priceTd = document.createElement('td');
+        priceTd.textContent = `${formatMoney(tier.price)}/month`;
+        tr.appendChild(priceTd);
+
+        const diffTd = document.createElement('td');
+        if (diff > 0) {
+          diffTd.textContent = `${formatMoney(diff)}/month less than your entered total`;
+        } else if (diff < 0) {
+          diffTd.textContent = `${formatMoney(Math.abs(diff))}/month more than your entered total`;
+        } else {
+          diffTd.textContent = 'Matches your entered total exactly';
+        }
+        tr.appendChild(diffTd);
+
+        resultTbody.appendChild(tr);
+      });
+
+      resultBox.hidden = false;
+
+      // WCAG 4.1.3 (status messages) / 4.1.2: the result panel is
+      // aria-live="polite" and also receives focus directly so both
+      // screen-reader and keyboard users land on the comparison immediately.
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      resultBox.focus({ preventScroll: true });
+    });
+
+    resetBtn.addEventListener('click', () => {
+      inputs.forEach((input) => {
+        input.value = '0';
+      });
+      updateRunningTotal();
+      resultBox.hidden = true;
+      resultTbody.replaceChildren();
+      resultSummary.textContent = '';
+      inputs[0]?.focus();
+    });
+  </script>
+</Layout>

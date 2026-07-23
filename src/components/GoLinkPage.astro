@@ -1,0 +1,60 @@
+---
+// GoLinkPage: renders the /go/<program>/ redirector/placeholder page.
+//
+// HOW TO ACTIVATE A REAL AFFILIATE LINK
+// --------------------------------------
+// 1. Get the approved tracking URL from the program's affiliate dashboard
+//    (must match the source-of-truth network logged in COMPLIANCE_REGISTER.md —
+//    e.g. PartnerStack for GetResponse/Kit, vendor-direct for Systeme.io/GoHighLevel).
+// 2. Open src/data/go-links.json and replace the "PENDING_AFFILIATE_LINK" string
+//    for that program's key with the real tracking URL (a full https:// URL).
+// 3. Do NOT hand-construct a "guessed" referral URL (e.g. adding ?ref=stackcompass
+//    to the vendor homepage) — only paste the exact URL issued by the program.
+// 4. Rebuild the site. Once the JSON value is a real URL (not the PENDING sentinel),
+//    this page automatically switches from the "pending" notice to a real redirect,
+//    and still keeps the rel="sponsored nofollow" treatment on the outbound link.
+// 5. Screenshot the rendered disclosure + link for CREATIVE_ARCHIVE per compliance rule.
+
+import Layout from '../layouts/Layout.astro';
+import goLinks from '../data/go-links.json';
+
+export interface Props {
+  program: 'systeme-io' | 'gohighlevel' | 'getresponse' | 'kit' | 'brevo' | 'semrush';
+  name: string;
+}
+
+const { program, name } = Astro.props;
+const target = goLinks[program];
+const isPending = !target || target === 'PENDING_AFFILIATE_LINK';
+---
+<Layout
+  title={`Go: ${name}`}
+  description={`Outbound affiliate link status for ${name}.`}
+  showDisclosure={true}
+  slug={`/go/${program}/`}
+  ogType="website"
+  forceNoindex={true}
+>
+  <h1>{name} link</h1>
+
+  {isPending ? (
+    <>
+      <div class="callout amber">
+        <p><strong>Affiliate link pending.</strong> We have not yet been issued a live tracking link for {name}'s affiliate program. Rather than guess at one, this page is holding the spot until a real, verified link is added — see <code>src/data/go-links.json</code>.</p>
+      </div>
+      <p>In the meantime, you can visit {name}'s site directly (this is <strong>not</strong> an affiliate link, so we earn nothing from this click):</p>
+      <p>
+        <a class="btn secondary" href="/" >← Back to StackCompass</a>
+      </p>
+      <p style="font-size:0.85rem;color:#52606d;">Program terms referenced on this site were verified 2026-07-22 against official vendor/network documentation. See <a href="/disclosure/">Disclosure</a> for details.</p>
+    </>
+  ) : (
+    <>
+      <p>Continuing to {name} via our affiliate link. If you sign up, we may earn a commission at no extra cost to you.</p>
+      <p>
+        <a class="btn" href={target} rel="sponsored nofollow">Continue to {name} →</a>
+      </p>
+      <meta http-equiv="refresh" content={`3;url=${target}`} />
+    </>
+  )}
+</Layout>

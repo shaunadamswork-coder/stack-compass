@@ -1,0 +1,285 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+---
+<Layout
+  title="Which Tool Fits Me?"
+  description="A short, transparent 4-question quiz that matches you to Systeme.io, GetResponse, GoHighLevel, or Kit based on your team size, tooling needs, and budget."
+  activeNav="tool"
+  slug="/tools/which-tool-fits-me/"
+  ogType="website"
+>
+  <h1>Which Tool Fits Me?</h1>
+
+  <div class="lede">
+    <p>Answer four quick questions. This runs entirely in your browser — nothing is saved, uploaded, or remembered between visits (no cookies, no local storage). Your result will include an internal <code>/go/</code> affiliate link where one exists, plus the disclosure below.</p>
+  </div>
+
+  <div class="callout" id="how-it-works">
+    <p><strong>How this works (not a black box):</strong> this is a fixed, human-written decision tree — not an AI model or a hidden scoring formula. In order: (1) if you manage a multi-client agency, we point to GoHighLevel, the only tool here built for white-label/multi-client management; (2) otherwise, if you need paid course or membership hosting, we point to Systeme.io, the only one of these four with that built in; (3) otherwise, if you want funnels and email combined in one tool, we point to Systeme.io (free-plan path) or GetResponse (paid, more established path); (4) otherwise, if you mainly want focused email/newsletter tooling, we point to Kit (lower-friction entry) or GetResponse (deeper automation), based on your budget answer. Every result shows the specific reason and at least one honest caveat.</p>
+  </div>
+
+  <form id="quiz-form">
+    <div class="quiz-q" data-q="team">
+      <h3 id="q-team">1. Are you a solo creator, or do you run a small agency managing multiple client accounts?</h3>
+      <div class="quiz-options" role="group" aria-labelledby="q-team">
+        <button type="button" class="quiz-opt" data-q="team" data-v="solo" aria-pressed="false">Solo creator</button>
+        <button type="button" class="quiz-opt" data-q="team" data-v="agency" aria-pressed="false">Small agency (multiple clients)</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-q="courses">
+      <h3 id="q-courses">2. Will you host paid courses or memberships inside this tool?</h3>
+      <div class="quiz-options" role="group" aria-labelledby="q-courses">
+        <button type="button" class="quiz-opt" data-q="courses" data-v="yes" aria-pressed="false">Yes, I need course/membership hosting</button>
+        <button type="button" class="quiz-opt" data-q="courses" data-v="no" aria-pressed="false">No / not needed</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-q="allInOne">
+      <h3 id="q-allInOne">3. Do you want funnels + email in one tool, or mainly best-in-class email/newsletter tooling?</h3>
+      <div class="quiz-options" role="group" aria-labelledby="q-allInOne">
+        <button type="button" class="quiz-opt" data-q="allInOne" data-v="yes" aria-pressed="false">Funnels + email in one tool</button>
+        <button type="button" class="quiz-opt" data-q="allInOne" data-v="no" aria-pressed="false">Mainly focused email/newsletter tooling</button>
+      </div>
+    </div>
+
+    <div class="quiz-q" data-q="budget">
+      <h3 id="q-budget">4. How budget-sensitive are you right now?</h3>
+      <div class="quiz-options" role="group" aria-labelledby="q-budget">
+        <button type="button" class="quiz-opt" data-q="budget" data-v="free" aria-pressed="false">I want a free plan to start</button>
+        <button type="button" class="quiz-opt" data-q="budget" data-v="pay" aria-pressed="false">I'm fine paying for the right fit</button>
+      </div>
+    </div>
+  </form>
+
+  <p>
+    <button id="see-result" class="btn" disabled>See my match</button>
+    <button id="retake" class="btn secondary" hidden>Retake quiz</button>
+  </p>
+
+  <div id="result" hidden aria-live="polite" tabindex="-1">
+    <h2>Your match: <span id="result-name"></span></h2>
+    <p id="result-reason" class="lede" style="border-left-color:var(--teal);"></p>
+    <div class="callout amber">
+      <p><strong>Honest caveat:</strong> <span id="result-caveat"></span></p>
+    </div>
+    <div id="result-cta"></div>
+  </div>
+
+  <p style="margin-top:2rem;"><a href="/">← Back to the full comparison hub</a></p>
+
+  <style>
+    .quiz-q {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin-bottom: 1rem;
+    }
+    .quiz-q h3 { margin-top: 0; }
+    .quiz-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .quiz-opt {
+      flex: 1 1 200px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.65rem 0.8rem;
+      font-size: 0.95rem;
+      font-family: inherit;
+      color: var(--ink);
+      cursor: pointer;
+      text-align: left;
+    }
+    .quiz-opt:hover { border-color: var(--teal); }
+    .quiz-opt.selected {
+      background: var(--teal);
+      border-color: var(--teal);
+      color: #fff;
+      font-weight: 600;
+    }
+    #see-result:disabled { opacity: 0.5; cursor: not-allowed; }
+    #result { margin-top: 1.5rem; }
+  </style>
+
+  <script>
+    // In-memory only quiz state — intentionally NOT persisted to
+    // localStorage / sessionStorage / cookies per the compliance spec.
+    // Reloading or leaving the page discards all answers.
+    type Answers = {
+      team?: 'solo' | 'agency';
+      courses?: 'yes' | 'no';
+      allInOne?: 'yes' | 'no';
+      budget?: 'free' | 'pay';
+    };
+
+    const answers: Answers = {};
+    const questionKeys = ['team', 'courses', 'allInOne', 'budget'] as const;
+
+    const seeResultBtn = document.getElementById('see-result') as HTMLButtonElement;
+    const retakeBtn = document.getElementById('retake') as HTMLButtonElement;
+    const form = document.getElementById('quiz-form') as HTMLFormElement;
+    const resultBox = document.getElementById('result') as HTMLDivElement;
+    const resultName = document.getElementById('result-name') as HTMLSpanElement;
+    const resultReason = document.getElementById('result-reason') as HTMLParagraphElement;
+    const resultCaveat = document.getElementById('result-caveat') as HTMLSpanElement;
+    const resultCta = document.getElementById('result-cta') as HTMLDivElement;
+
+    function updateSeeResultState() {
+      const allAnswered = questionKeys.every((k) => answers[k] !== undefined);
+      seeResultBtn.disabled = !allAnswered;
+    }
+
+    form.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      if (!target.classList.contains('quiz-opt')) return;
+      const q = target.getAttribute('data-q') as keyof Answers;
+      const v = target.getAttribute('data-v');
+      if (!q || !v) return;
+
+      // @ts-expect-error — narrow union assigned via known button set
+      answers[q] = v;
+
+      // Update selected styling + aria-pressed state within this question group only.
+      const group = target.closest('.quiz-q');
+      group?.querySelectorAll('.quiz-opt').forEach((btn) => {
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      target.classList.add('selected');
+      target.setAttribute('aria-pressed', 'true');
+
+      updateSeeResultState();
+    });
+
+    interface Result {
+      programKey: 'systeme-io' | 'gohighlevel' | 'getresponse' | 'kit';
+      name: string;
+      goHref: string | null;
+      reason: string;
+      caveat: string;
+    }
+
+    function recommend(a: Required<Answers>): Result {
+      // 1) Agency need dominates — no other tool here replicates white-label/multi-client management.
+      if (a.team === 'agency') {
+        return {
+          programKey: 'gohighlevel',
+          name: 'GoHighLevel',
+          goHref: '/go/gohighlevel/',
+          reason: "You manage multiple client accounts — GoHighLevel is the only tool in this set built for white-label, multi-client management (verified 2026-07-22).",
+          caveat: "Its commission needs 45 days of active good-standing before it qualifies, and the 5% second-tier override requires HighLevel's approval (verified 2026-07-22) — a longer runway than the other three programs. Plan pricing is not independently verified on this site.",
+        };
+      }
+
+      // 2) Course/membership hosting need — only Systeme.io bundles this in with funnels+email.
+      if (a.courses === 'yes') {
+        return {
+          programKey: 'systeme-io',
+          name: 'Systeme.io',
+          goHref: '/go/systeme-io/',
+          reason: "You want paid course or membership hosting built into your core tool — Systeme.io is the only one of these four that bundles that in with funnels and email (verified 2026-07-22).",
+          caveat: 'Systeme.io\'s affiliate program uses a 1-year attribution window, not a "lifetime" cookie, despite how it is sometimes described elsewhere (verified 2026-07-22). Paid-tier pricing above the free plan is not independently verified on this site.',
+        };
+      }
+
+      // 3) Wants funnels + email combined, no course need.
+      if (a.allInOne === 'yes') {
+        if (a.budget === 'free') {
+          return {
+            programKey: 'systeme-io',
+            name: 'Systeme.io',
+            goHref: '/go/systeme-io/',
+            reason: 'You want funnels and email in one tool and a free plan to start — Systeme.io offers a free tier plus a flat 60% recurring affiliate commission (verified 2026-07-22).',
+            caveat: 'Its attribution window is 1 year, not "lifetime" (verified 2026-07-22). Paid-tier pricing above the free plan is not independently verified on this site.',
+          };
+        }
+        return {
+          programKey: 'getresponse',
+          name: 'GetResponse',
+          goHref: '/go/getresponse/',
+          reason: 'You want an all-in-one funnel-and-email setup and are comfortable paying for a more established platform — GetResponse pairs email automation with funnel features (program terms verified 2026-07-22).',
+          caveat: "GetResponse's commission is tiered (40% → 50% → 60%) and capped at 12 months per referral (verified 2026-07-22), so payout on a given referral stops after a year even if the customer stays subscribed. Plan pricing is not independently verified on this site.",
+        };
+      }
+
+      // 4) Mainly focused email/newsletter tooling, no funnel or course need.
+      if (a.budget === 'free') {
+        return {
+          programKey: 'kit',
+          name: 'Kit',
+          goHref: null,
+          reason: 'You mainly want focused email/newsletter tooling rather than a funnel builder, and a lower-friction entry point — Kit is built around creator email and sender reputation.',
+          caveat: "We have not independently verified Kit's current entry-level pricing or confirmed a free plan here — check kit.com directly. Kit's 50% recurring commission is capped at 12 months per referral, though status tiers can extend it to 10-20% recurring beyond that for high-volume affiliates (verified 2026-07-22). This site does not yet have a tracked affiliate link for Kit.",
+        };
+      }
+      return {
+        programKey: 'getresponse',
+        name: 'GetResponse',
+        goHref: '/go/getresponse/',
+        reason: 'You want mature email-marketing automation and are comfortable paying for it — GetResponse has an established deliverability and automation track record (program terms verified 2026-07-22).',
+        caveat: "GetResponse's commission is tiered and capped at 12 months per referral (verified 2026-07-22). Plan pricing is not independently verified on this site.",
+      };
+    }
+
+    seeResultBtn.addEventListener('click', () => {
+      if (!questionKeys.every((k) => answers[k] !== undefined)) return;
+      const result = recommend(answers as Required<Answers>);
+
+      resultName.textContent = result.name;
+      resultReason.textContent = result.reason;
+      resultCaveat.textContent = result.caveat;
+
+      resultCta.replaceChildren();
+      if (result.goHref) {
+        const wrap = document.createElement('div');
+        wrap.className = 'cta-block';
+
+        const link = document.createElement('a');
+        link.className = 'btn';
+        link.href = result.goHref;
+        link.rel = 'sponsored nofollow';
+        link.textContent = `Go to ${result.name} →`;
+        wrap.appendChild(link);
+
+        const disclosure = document.createElement('p');
+        disclosure.className = 'cta-disclosure';
+        disclosure.innerHTML = `This is an affiliate link to ${result.name}. We may earn a commission at no extra cost to you — see our <a href="/disclosure/">disclosure</a>.`;
+        wrap.appendChild(disclosure);
+
+        resultCta.appendChild(wrap);
+      } else {
+        const notice = document.createElement('div');
+        notice.className = 'callout brick';
+        notice.innerHTML = `<p><strong>No tracked affiliate link yet for ${result.name} on this site.</strong> Rather than guess at one, we're not linking out with a fake referral code. Visit <a href="/disclosure/">Disclosure</a> for details, or check out our <a href="/">full comparison hub</a>.</p>`;
+        resultCta.appendChild(notice);
+      }
+
+      resultBox.hidden = false;
+      seeResultBtn.hidden = true;
+      retakeBtn.hidden = false;
+
+      // WCAG 4.1.3 (status messages) / 4.1.2 (name, role, value): the result
+      // panel is aria-live="polite" AND receives focus directly, so both
+      // screen-reader and keyboard users land on the result the moment it appears.
+      resultBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      resultBox.focus({ preventScroll: true });
+    });
+
+    retakeBtn.addEventListener('click', () => {
+      questionKeys.forEach((k) => { delete answers[k]; });
+      document.querySelectorAll('.quiz-opt.selected').forEach((btn) => {
+        btn.classList.remove('selected');
+        btn.setAttribute('aria-pressed', 'false');
+      });
+      resultBox.hidden = true;
+      seeResultBtn.hidden = false;
+      seeResultBtn.disabled = true;
+      retakeBtn.hidden = true;
+      window.scrollTo({ top: form.offsetTop - 80, behavior: 'smooth' });
+    });
+  </script>
+</Layout>

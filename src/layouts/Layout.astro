@@ -1,0 +1,378 @@
+---
+// Base layout for every StackCompass page.
+// Palette: bg #f4f5f7, surface #fff, ink #171a1f, teal #0f766e (primary),
+// slate #2e4a6b, amber #b45309, brick #b42318. System/Inter-style font stack, no external fonts/CDNs.
+import { SITE_URL, PUBLIC_MODE, ORG } from '../config';
+
+export interface Props {
+  title: string;
+  description: string;
+  /** Raw JSON-LD object(s) already assembled by the page — rendered as-is into <head>, alongside the sitewide Organization/WebSite graph. */
+  jsonLd?: object | object[];
+  /** Show the FTC-style affiliate disclosure banner above content. Every content page should keep this true. */
+  showDisclosure?: boolean;
+  /** Highlight the matching nav item: 'home' | 'compare' | 'alternatives' | 'ghl-pricing' | 'tool' | 'disclosure' */
+  activeNav?: string;
+  /** Path from the site root, e.g. '/gohighlevel-pricing/'. Drives canonical + OG/Twitter urls + BreadcrumbList item URLs. Defaults to '/'. */
+  slug?: string;
+  /** og:type — 'article' for editorial content pages, 'website' for hub/utility/redirect pages. */
+  ogType?: 'article' | 'website';
+  /** Force noindex,nofollow even when PUBLIC_MODE=true (used for /go/ affiliate redirect stubs, which are intentionally excluded from search). */
+  forceNoindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  jsonLd,
+  showDisclosure = true,
+  activeNav = '',
+  slug = '/',
+  ogType = 'website',
+  forceNoindex = false,
+} = Astro.props;
+
+const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+
+const canonicalUrl = `${SITE_URL}${slug}`;
+const isIndexable = PUBLIC_MODE && !forceNoindex;
+const robotsContent = isIndexable ? 'index, follow' : 'noindex, nofollow';
+
+// Sitewide Organization + WebSite graph — emitted on every page regardless
+// of per-page Article/FAQPage/BreadcrumbList JSON-LD.
+const orgWebsiteJsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization',
+      name: ORG.name,
+      url: SITE_URL,
+      description: ORG.description,
+    },
+    {
+      '@type': 'WebSite',
+      name: ORG.name,
+      url: SITE_URL,
+      publisher: { '@type': 'Organization', name: ORG.publisherName },
+    },
+  ],
+};
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>{title} · StackCompass</title>
+  <meta name="description" content={description} />
+  <meta name="robots" content={robotsContent} />
+  <!-- robots meta is driven by PUBLIC_MODE in src/config.ts: noindex while staging (PUBLIC_MODE=false), index,follow once flipped true (unless forceNoindex is set on this page, e.g. /go/ redirect stubs) -->
+  <link rel="canonical" href={canonicalUrl} />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonicalUrl} />
+  <meta property="og:type" content={ogType} />
+  <meta property="og:site_name" content={ORG.name} />
+
+  <!-- Twitter card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+
+  <script type="application/ld+json" set:html={JSON.stringify(orgWebsiteJsonLd)} />
+  {jsonLdBlocks.map((block) => (
+    <script type="application/ld+json" set:html={JSON.stringify(block)} />
+  ))}
+  <style>
+    :root {
+      --bg: #f4f5f7;
+      --surface: #ffffff;
+      --ink: #171a1f;
+      --teal: #0f766e;
+      --slate: #2e4a6b;
+      --amber: #b45309;
+      --brick: #b42318;
+      --border: #dfe3e8;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { -webkit-text-size-adjust: 100%; }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-sans);
+      line-height: 1.55;
+      font-size: 16px;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    a { color: var(--teal); text-decoration-thickness: 1px; }
+    a:hover { color: var(--slate); }
+
+    .wrap {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0 1.25rem;
+    }
+
+    /* ---------- Skip link (a11y) ---------- */
+    .skip {
+      position: absolute;
+      left: -999px;
+      top: -999px;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      background: var(--teal);
+      color: #fff;
+      z-index: 1000;
+    }
+    .skip:focus {
+      position: fixed;
+      left: 1rem;
+      top: 1rem;
+      width: auto;
+      height: auto;
+      overflow: visible;
+      padding: 0.65rem 1.1rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    /* ---------- Header ---------- */
+    header.site-header {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .header-inner {
+      max-width: 880px;
+      margin: 0 auto;
+      padding: 0.9rem 1.25rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 1.15rem;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .brand span { color: var(--teal); }
+    nav.site-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.25rem 1rem;
+      font-size: 0.92rem;
+    }
+    nav.site-nav a {
+      color: var(--ink);
+      text-decoration: none;
+      padding: 0.25rem 0.1rem;
+      border-bottom: 2px solid transparent;
+    }
+    nav.site-nav a:hover,
+    nav.site-nav a.active {
+      color: var(--teal);
+      border-bottom-color: var(--teal);
+    }
+
+    /* ---------- Disclosure banner ---------- */
+    .disclosure-banner {
+      background: #fff7ed;
+      border-bottom: 1px solid #fed7aa;
+      color: var(--ink);
+      font-size: 0.92rem;
+    }
+    .disclosure-banner .wrap {
+      padding: 0.6rem 1.25rem;
+    }
+    .disclosure-banner strong { color: var(--amber); }
+    .disclosure-banner a { color: var(--slate); font-weight: 600; }
+
+    /* ---------- Main content ---------- */
+    main { padding: 2rem 0 3rem; }
+    main:focus { outline: none; }
+
+    h1 { font-size: 1.75rem; line-height: 1.2; margin: 0 0 0.75rem; letter-spacing: -0.01em; }
+    h2 { font-size: 1.35rem; margin: 2rem 0 0.75rem; color: var(--slate); }
+    h3 { font-size: 1.1rem; margin: 1.5rem 0 0.5rem; }
+    p { margin: 0 0 1rem; }
+
+    .lede {
+      font-size: 1.05rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--teal);
+      border-radius: 6px;
+      padding: 1rem 1.1rem;
+      margin: 0 0 1.5rem;
+    }
+
+    /* ---------- Tables (scroll on mobile) ---------- */
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      margin: 1rem 0 1.5rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 560px;
+      font-size: 0.92rem;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.6rem 0.75rem;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    thead th {
+      background: #eef2f6;
+      color: var(--slate);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    tbody tr:last-child td { border-bottom: none; }
+
+    /* ---------- CTA ---------- */
+    .cta-block {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.1rem 1.25rem;
+      margin: 1.25rem 0;
+    }
+    .cta-block .cta-disclosure {
+      font-size: 0.82rem;
+      color: #52606d;
+      margin: 0.5rem 0 0;
+    }
+    .btn {
+      display: inline-block;
+      background: var(--teal);
+      color: #fff;
+      font-weight: 700;
+      text-decoration: none;
+      padding: 0.65rem 1.1rem;
+      border-radius: 6px;
+      font-size: 0.95rem;
+    }
+    .btn:hover { background: #0c5d56; color: #fff; }
+    .btn.secondary {
+      background: transparent;
+      color: var(--slate);
+      border: 1px solid var(--slate);
+    }
+    .btn.secondary:hover { background: #eef2f6; color: var(--slate); }
+
+    .todo {
+      color: var(--brick);
+      font-weight: 600;
+      background: #fdecea;
+      padding: 0.05rem 0.35rem;
+      border-radius: 4px;
+      font-size: 0.9em;
+    }
+
+    .callout {
+      background: #eef2f6;
+      border-radius: 8px;
+      padding: 1rem 1.1rem;
+      margin: 1.25rem 0;
+      font-size: 0.95rem;
+    }
+    .callout.amber { background: #fff7ed; border: 1px solid #fed7aa; }
+    .callout.brick { background: #fdecea; border: 1px solid #f3c6c1; }
+
+    ul, ol { padding-left: 1.35rem; }
+    li { margin-bottom: 0.35rem; }
+
+    .faq-item { margin-bottom: 1.25rem; }
+    .faq-item h3 { margin-top: 0; color: var(--ink); }
+
+    /* ---------- Footer ---------- */
+    footer.site-footer {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: #52606d;
+    }
+    footer.site-footer .wrap {
+      padding: 1.5rem 1.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    footer.site-footer nav {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    footer.site-footer a { color: var(--slate); }
+    .verified-line { color: var(--slate); font-weight: 600; }
+
+    @media (min-width: 640px) {
+      h1 { font-size: 2.15rem; }
+      main { padding: 2.5rem 0 3.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/">Stack<span>Compass</span></a>
+      <nav class="site-nav" aria-label="Primary">
+        <a href="/" class={activeNav === 'home' ? 'active' : ''}>Home</a>
+        <a href="/compare/systeme-io-vs-getresponse/" class={activeNav === 'compare' ? 'active' : ''}>Compare</a>
+        <a href="/alternatives/gohighlevel/" class={activeNav === 'alternatives' ? 'active' : ''}>Alternatives</a>
+        <a href="/gohighlevel-pricing/" class={activeNav === 'ghl-pricing' ? 'active' : ''}>GoHighLevel Pricing</a>
+        <a href="/tools/which-tool-fits-me/" class={activeNav === 'tool' ? 'active' : ''}>Which tool fits me?</a>
+        <a href="/disclosure/" class={activeNav === 'disclosure' ? 'active' : ''}>Disclosure</a>
+      </nav>
+    </div>
+  </header>
+
+  {showDisclosure && (
+    <div class="disclosure-banner">
+      <div class="wrap">
+        <strong>Disclosure:</strong> Some links on this page are affiliate links. If you sign up through one, we may earn a commission at no extra cost to you. It never changes what we recommend or the prices you pay. <a href="/disclosure/">How we make money →</a>
+      </div>
+    </div>
+  )}
+
+  <main id="main" tabindex="-1">
+    <div class="wrap">
+      <slot />
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <nav aria-label="Footer">
+        <a href="/disclosure/">Disclosure</a>
+        <a href="/privacy/">Privacy</a>
+        <a href="/">Home</a>
+      </nav>
+      <p class="verified-line">Figures verified 2026-07-22; re-checked weekly.</p>
+      <p>StackCompass is an independent comparison site. We are not affiliated with, endorsed by, or officially connected to any vendor named on this site. All product names, logos, and brands are property of their respective owners.</p>
+    </div>
+  </footer>
+</body>
+</html>

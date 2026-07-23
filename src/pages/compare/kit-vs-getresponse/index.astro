@@ -1,0 +1,190 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/compare/kit-vs-getresponse/';
+
+// JSON-LD originally authored in /20_content/spokes/kit-vs-getresponse.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Kit vs. GetResponse: Email Marketing Affiliate Program Comparison",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Kit vs. GetResponse', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which pays more, Kit or GetResponse?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on volume. Kit's flat 50% (verified 2026-07-22) is straightforward, but GetResponse can reach 60% for high-volume affiliates, though both structures cap at 12 months per referral (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kit's commission lifetime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is capped at 12 months, though status tiers of 10%, 15%, or 20% can apply beyond that for high-volume affiliates (verified 2026-07-22). This page avoids describing it as lifetime."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is GetResponse's commission lifetime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is capped at 12 months per referral (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do both programs use the same tracking network?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, both run through PartnerStack (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What are Kit's status tiers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Additional commission percentages of 10%, 15%, or 20% available beyond the initial 12-month cap, reserved for high-volume affiliates (verified 2026-07-22). Exact qualification thresholds are not detailed here and should be confirmed against current program documentation before publish."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which tool is easier for a beginner creator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Both are creator-focused platforms. The practical difference tends to come down to existing familiarity, template and deliverability preferences, and pricing at the reader's list size — none of which is asserted as fact here given unverified plan pricing for both."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="Kit vs. GetResponse"
+  description="Affiliate program comparison for creators: commission structure, cookie window, and network for Kit (formerly ConvertKit) and GetResponse — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="compare"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>Kit vs. GetResponse: Email Marketing Affiliate Program Comparison</h1>
+
+  <div class="lede">
+    <p>Kit (formerly ConvertKit) and GetResponse are both email marketing platforms built for creators and small businesses, which makes this a more direct comparison than most on this site. Kit's affiliate program pays 50% recurring commission capped at 12 months, with additional status tiers of 10%, 15%, or 20% available beyond that 12-month window for high-volume affiliates, on a 90-day cookie through PartnerStack (verified 2026-07-22). GetResponse pays a tiered 40% → 50% → 60% recurring commission, also capped at 12 months per referral, on a 90-day cookie through PartnerStack (verified 2026-07-22). Both programs share the same network, cookie length, and 12-month cap structure, but they scale differently: Kit's flat 50% is simple to project, while GetResponse's volume-based tiers can exceed Kit's rate for affiliates who qualify for its highest tier.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+    <CtaButton program="kit" label="Try Kit →" name="Kit" />
+    <CtaButton program="getresponse" label="Try GetResponse →" name="GetResponse" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th></th><th>Kit</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Commission</td><td>50% recurring, capped at 12 months; status tiers of 10/15/20% beyond 12 months for high-volume affiliates (verified 2026-07-22)</td><td>40% → 50% → 60% recurring, tiered by volume, capped at 12 months per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day (verified 2026-07-22)</td><td>90-day (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>PartnerStack (verified 2026-07-22)</td><td>PartnerStack (verified 2026-07-22)</td></tr>
+        <tr><td>Plan pricing</td><td><span class="todo">Kit plan price — verify before publish</span></td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This comparison is for:</strong></p>
+  <ul>
+    <li>Creators and solopreneurs comparing two email-marketing-first platforms directly</li>
+    <li>Affiliate marketers deciding which email tool's program to run, given nearly identical cookie length and network</li>
+    <li>Readers who have already ruled out all-in-one funnel platforms and want an email-specific pick</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers who need a funnel builder, course hosting, or CRM features built into the platform itself — both tools are primarily email/automation-focused, so readers with broader all-in-one needs should look at <a href="/alternatives/systeme-io/">Systeme.io</a> or <a href="/alternatives/gohighlevel/">GoHighLevel</a> instead</li>
+    <li>Readers expecting a large commission-rate gap between the two — the structures are closer than they first appear once the 12-month cap on both is accounted for</li>
+  </ul>
+
+  <h2>Comparison</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>Kit</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core focus</td><td>Email marketing and automation for creators (newsletters, forms, sequences)</td><td>Email marketing and marketing automation, with funnel features</td></tr>
+        <tr><td>Target user</td><td>Individual creators, newsletter writers, solopreneurs</td><td>Individual creators, small businesses, solo marketers</td></tr>
+        <tr><td>Entry pricing</td><td><span class="todo">Kit plan price — verify before publish</span></td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+        <tr><td>Affiliate commission</td><td>50% recurring, capped at 12 months, plus 10/15/20% status tiers beyond 12 months for high-volume affiliates (verified 2026-07-22)</td><td>40% → 50% → 60% recurring, tiered by volume, capped at 12 months per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day (verified 2026-07-22)</td><td>90-day (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>PartnerStack (verified 2026-07-22)</td><td>PartnerStack (verified 2026-07-22)</td></tr>
+        <tr><td>Best-fit audience</td><td>Newsletter-first creators wanting a simpler flat commission</td><td>Creators wanting to scale volume toward a higher tiered rate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Which pays more, Kit or GetResponse?</h3>
+    <p>It depends on volume. Kit's flat 50% (verified 2026-07-22) is straightforward, but GetResponse can reach 60% for high-volume affiliates, though both structures cap at 12 months per referral (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Kit's commission "lifetime"?</h3>
+    <p>No. It is capped at 12 months, though status tiers of 10%, 15%, or 20% can apply beyond that for high-volume affiliates (verified 2026-07-22). This page avoids describing it as lifetime.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is GetResponse's commission "lifetime"?</h3>
+    <p>No. It is capped at 12 months per referral (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do both programs use the same tracking network?</h3>
+    <p>Yes, both run through PartnerStack (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>What are Kit's "status tiers"?</h3>
+    <p>Additional commission percentages of 10%, 15%, or 20% available beyond the initial 12-month cap, reserved for high-volume affiliates (verified 2026-07-22). Exact qualification thresholds are not detailed here and should be confirmed against current program documentation before publish.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which tool is easier for a beginner creator?</h3>
+    <p>Both are creator-focused platforms. The practical difference tends to come down to existing familiarity, template and deliverability preferences, and pricing at the reader's list size — none of which is asserted as fact here given unverified plan pricing for both.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/alternatives/kit/">Kit alternatives for creators</a></li>
+    <li><a href="/alternatives/getresponse/">GetResponse alternatives</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

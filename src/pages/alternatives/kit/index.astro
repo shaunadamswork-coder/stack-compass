@@ -1,0 +1,220 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/alternatives/kit/';
+
+// JSON-LD originally authored in /20_content/spokes/alternatives-to-kit.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+//
+// IMPORTANT: StackCompass has no affiliate program/link with Kajabi. Kajabi is
+// discussed here informationally only — there is no /go/kajabi/ stub and no
+// CtaButton for Kajabi anywhere on this page.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "Alternatives to Kit: GetResponse, Systeme.io, and Kajabi Compared by Use Case",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'Kit Alternatives', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why would someone look for alternatives to Kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common reasons include wanting a tiered commission that scales past a flat rate, wanting a lower-cost all-in-one bundle, or needing dedicated course and membership tooling."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is GetResponse a direct replacement for Kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Largely yes for the email and automation use case, since both are primarily email marketing platforms."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Systeme.io a direct replacement for Kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Only partially. Systeme.io bundles funnels, course hosting, and email in one free-plan tool, but its email feature set is not the same specialization as Kit's."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kajabi a direct replacement for Kit?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kajabi is built for course and membership sales rather than newsletter-first email marketing. StackCompass does not have an affiliate link or tracked relationship with Kajabi; it is referenced here informationally only."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Kit's commission lifetime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kit's commission is capped at 12 months per referral, with additional status tiers of 10, 15, or 20 percent available beyond that for high-volume affiliates (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which alternative has a free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Systeme.io has a free plan referenced in its verified facts. Kit, GetResponse, and Kajabi do not have a free plan referenced here."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="Kit Alternatives"
+  description="Kit (formerly ConvertKit) alternatives for creators: GetResponse, Systeme.io, and Kajabi compared by use case — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="alternatives"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>Alternatives to Kit: GetResponse, Systeme.io, and Kajabi Compared by Use Case</h1>
+
+  <div class="lede">
+    <p>Kit (formerly ConvertKit) is a creator-focused email marketing platform, well known among newsletter writers and solo creators, with a 50% recurring affiliate commission capped at 12 months plus additional status tiers of 10%, 15%, or 20% beyond that for high-volume affiliates, on a 90-day cookie through PartnerStack (verified 2026-07-22). Readers look for alternatives for a few distinct reasons: wanting a tiered commission structure that can scale past Kit's flat rate at volume (GetResponse), wanting a lower-cost all-in-one alternative that bundles funnels and courses alongside email (Systeme.io), or needing a platform built specifically around selling courses and memberships rather than sending newsletters (Kajabi). Each alternative addresses a different piece of what Kit does well, rather than replacing it outright.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+    <CtaButton program="kit" label="Try Kit →" name="Kit" />
+    <CtaButton program="getresponse" label="Try GetResponse →" name="GetResponse" />
+    <CtaButton program="systeme-io" label="Try Systeme.io →" name="Systeme.io" />
+  </div>
+  <div class="callout amber">
+    <p><strong>About Kajabi on this page:</strong> Kajabi is discussed below for comparison purposes only. StackCompass does not have an affiliate link or tracked partnership with Kajabi — mentions of Kajabi here are informational, not promotional, and there is no outbound Kajabi link on this site.</p>
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Tool</th><th>Commission</th><th>Cap / Window</th><th>Cookie</th><th>Network</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Kit</td>
+          <td>50% recurring, capped at 12 months, plus 10/15/20% status tiers beyond 12 months for high-volume affiliates (verified 2026-07-22)</td>
+          <td>Capped at 12 months per referral</td>
+          <td>90-day (verified 2026-07-22)</td>
+          <td>PartnerStack</td>
+        </tr>
+        <tr>
+          <td>GetResponse</td>
+          <td>40% → 50% → 60% recurring, tiered by volume (verified 2026-07-22)</td>
+          <td>Capped at 12 months per referral (verified 2026-07-22)</td>
+          <td>90-day (verified 2026-07-22)</td>
+          <td>PartnerStack</td>
+        </tr>
+        <tr>
+          <td>Systeme.io</td>
+          <td>60% recurring (verified 2026-07-22)</td>
+          <td>1-year attribution window (verified 2026-07-22)</td>
+          <td>Not separately specified here</td>
+          <td>Vendor-direct</td>
+        </tr>
+        <tr>
+          <td>Kajabi</td>
+          <td>Tiered: up to 100% first-month bounty, up to 20% recurring at higher tiers (verified 2026-07-22)</td>
+          <td>Not a flat time cap; tiered by affiliate level</td>
+          <td>30-day (verified 2026-07-22)</td>
+          <td>Vendor-direct — no tracked link on this site</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Plan prices: <span class="todo">Kit plan price — verify before publish</span>, <span class="todo">GetResponse plan price — verify before publish</span>, <span class="todo">Systeme.io plan price — verify before publish</span>, <span class="todo">Kajabi plan price — verify before publish</span>.</p>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This page is for:</strong></p>
+  <ul>
+    <li>Creators or affiliates evaluating Kit who want alternatives mapped to specific needs — commission scaling, all-in-one budget tooling, or course/membership delivery</li>
+    <li>Readers deciding which of these programs to run alongside or instead of Kit's</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers wanting a single universal replacement — as with the other alternatives pages on this site, the right pick depends on which specific need is driving the search, not a generic ranking</li>
+    <li>Readers wanting a course/membership platform recommendation without understanding that Kajabi's affiliate program requires being a paying customer first (verified 2026-07-22), and that this site does not have a tracked Kajabi link</li>
+  </ul>
+
+  <h2>Comparison by use case</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Use case</th><th>Recommended</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Wanting a commission structure that can scale above 50% at volume</td><td>GetResponse</td><td>Tiered 40% → 50% → 60% structure rewards higher-volume affiliates (verified 2026-07-22)</td></tr>
+        <tr><td>Wanting a lower-cost, all-in-one alternative bundling funnels, email, and courses</td><td>Systeme.io</td><td>Free plan and flat 60% recurring commission (verified 2026-07-22)</td></tr>
+        <tr><td>Selling courses or memberships rather than running a newsletter-first email program</td><td>Kajabi</td><td>Purpose-built course/membership platform; affiliate program requires being a paying customer (verified 2026-07-22); not linked from this site</td></tr>
+        <tr><td>Wanting to stay newsletter/email-first with a simple flat commission</td><td>Kit itself</td><td>50% recurring is straightforward to explain, capped at 12 months (verified 2026-07-22)</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Why would someone look for alternatives to Kit?</h3>
+    <p>Common reasons include wanting a tiered commission that scales past a flat rate, wanting a lower-cost all-in-one bundle, or needing dedicated course/membership tooling. This is not a claim that Kit is worse — it is built specifically for email/newsletter workflows.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is GetResponse a direct replacement for Kit?</h3>
+    <p>Largely yes for the email/automation use case. Both are primarily email marketing platforms, making this one of the more direct swaps on this list.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Systeme.io a direct replacement for Kit?</h3>
+    <p>Only partially. Systeme.io bundles funnels, course hosting, and email in one free-plan tool, but its email feature set is not the same specialization as Kit's.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Kajabi a direct replacement for Kit?</h3>
+    <p>No. Kajabi is built for course and membership sales, not newsletter-first email marketing. It fits creators whose core product is a course, not a newsletter — and StackCompass does not have an affiliate link or tracked relationship with Kajabi; it is referenced here informationally only.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Kit's commission "lifetime"?</h3>
+    <p>No. It is capped at 12 months per referral, with additional status tiers of 10%, 15%, or 20% available beyond that for high-volume affiliates (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which alternative has a free plan?</h3>
+    <p>Systeme.io has a free plan referenced in its verified facts. Kit, GetResponse, and Kajabi do not have a free plan referenced here.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/compare/kit-vs-getresponse/">Kit vs. GetResponse: full head-to-head</a></li>
+    <li><a href="/alternatives/getresponse/">GetResponse alternatives</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

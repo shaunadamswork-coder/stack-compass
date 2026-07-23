@@ -1,0 +1,207 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/alternatives/gohighlevel/';
+
+// JSON-LD originally authored in /20_content/spokes/alternatives-to-gohighlevel.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "GoHighLevel Alternatives for Creators and Agencies",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'GoHighLevel Alternatives', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Why would someone look for alternatives to GoHighLevel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Common reasons include not needing agency or white-label features, wanting a lower learning curve, or preferring a flat-rate commission over GoHighLevel's tiered, approval-gated second tier (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is Systeme.io a true replacement for GoHighLevel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not for agencies needing white-label sub-accounts. For a solo creator's own stack, Systeme.io covers similar core functionality with a simpler 60% recurring commission (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does GoHighLevel's second-tier commission work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel pays a 40% recurring base commission plus a 5% second-tier override, and the second tier requires HighLevel's approval (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 45-day requirement mentioned for GoHighLevel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel requires 45 days of active, good-standing referral status before a commission qualifies for payout (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does GetResponse offer agency-style features like GoHighLevel?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. GetResponse is primarily an email marketing and automation platform and does not replicate GoHighLevel's white-label, sub-account architecture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which alternative has the longer tracking window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Systeme.io's 1-year attribution window (verified 2026-07-22) is longer than GoHighLevel's and GetResponse's 90-day cookie (verified 2026-07-22)."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="GoHighLevel Alternatives"
+  description="GoHighLevel alternatives for creators and agencies: Systeme.io and GetResponse compared on affiliate program terms — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="alternatives"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>GoHighLevel Alternatives for Creators and Agencies</h1>
+
+  <div class="lede">
+    <p>GoHighLevel is built as a white-label CRM and funnel platform for agencies managing multiple client accounts, paying 40% recurring commission plus a 5% second-tier override (subject to HighLevel approval) on a 90-day cookie (verified 2026-07-22). For solo creators who don't need white-label or sub-account management, Systeme.io's simpler all-in-one funnel-and-email toolset with a flat 60% recurring commission (verified 2026-07-22) is usually a better fit. For creators prioritizing email deliverability and automation maturity over agency features, GetResponse is a reasonable alternative, with a tiered 40–60% recurring commission capped at 12 months per referral (verified 2026-07-22). Neither alternative replicates GoHighLevel's multi-client agency positioning exactly — they solve a different problem well.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+    <CtaButton program="gohighlevel" label="GoHighLevel →" name="GoHighLevel" />
+    <CtaButton program="systeme-io" label="Systeme.io →" name="Systeme.io" />
+    <CtaButton program="getresponse" label="GetResponse →" name="GetResponse" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Tool</th><th>Commission</th><th>Cap / window</th><th>Cookie</th><th>Network</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>GoHighLevel</td>
+          <td>40% recurring + 5% second-tier, requires HighLevel approval (verified 2026-07-22)</td>
+          <td>No stated recurring-payout cap; 45-day active good-standing requirement before qualifying (verified 2026-07-22)</td>
+          <td>90-day cookie (verified 2026-07-22)</td>
+          <td>Vendor/partner program</td>
+        </tr>
+        <tr>
+          <td>Systeme.io</td>
+          <td>60% recurring (verified 2026-07-22)</td>
+          <td>1-year attribution window (verified 2026-07-22)</td>
+          <td>Not separately specified here</td>
+          <td>Vendor-direct</td>
+        </tr>
+        <tr>
+          <td>GetResponse</td>
+          <td>40% → 50% → 60% recurring, tiered by volume (verified 2026-07-22)</td>
+          <td>Capped at 12 months per referral (verified 2026-07-22)</td>
+          <td>90-day cookie (verified 2026-07-22)</td>
+          <td>PartnerStack</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p>Plan prices: <span class="todo">GoHighLevel plan price — verify before publish</span>, <span class="todo">Systeme.io plan price — verify before publish</span>, <span class="todo">GetResponse plan price — verify before publish</span>.</p>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This page is for:</strong></p>
+  <ul>
+    <li>Agency owners currently evaluating GoHighLevel who want to see what an alternative stack looks like</li>
+    <li>Creators building "vs. GoHighLevel" comparison content who need accurate, sourced program terms</li>
+    <li>Solopreneurs who saw GoHighLevel recommended somewhere but don't actually run a multi-client agency</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers looking for a like-for-like GoHighLevel clone — neither Systeme.io nor GetResponse offers GoHighLevel's white-label, sub-account, agency-reseller architecture, so if that specific feature is the requirement, this page produces a different-shaped tool, not a direct substitute</li>
+  </ul>
+
+  <h2>Comparison by use case</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Use case</th><th>Recommended</th><th>Why</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Managing multiple client sub-accounts under one white-label brand</td><td>GoHighLevel</td><td>Purpose-built for agency/reseller structure; no true equivalent in this comparison</td></tr>
+        <tr><td>Solo creator wanting one free-to-start tool for funnels, email, and courses</td><td>Systeme.io</td><td>Freemium entry point, flat 60% recurring commission (verified 2026-07-22)</td></tr>
+        <tr><td>Prioritizing email deliverability and automation maturity over agency features</td><td>GetResponse</td><td>Tiered commission rewards volume; more established email-marketing pedigree</td></tr>
+        <tr><td>Wanting the simplest commission mechanic to explain to an audience</td><td>Systeme.io</td><td>Flat rate versus GoHighLevel's tiered, approval-gated second commission tier</td></tr>
+        <tr><td>Weighing the highest theoretical commission percentage</td><td>Systeme.io (60% flat) or GetResponse (60% top tier)</td><td>Both structurally different from GoHighLevel's 40% + 5% approval-gated model</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Why would someone look for alternatives to GoHighLevel?</h3>
+    <p>Common reasons include not needing agency or white-label features, wanting a lower learning curve, or preferring a flat-rate affiliate commission over GoHighLevel's tiered, approval-gated second commission tier (verified 2026-07-22). This isn't a claim that GoHighLevel is worse — it's built for a specific use case (multi-client agencies) that many creators simply don't have.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is Systeme.io a true replacement for GoHighLevel?</h3>
+    <p>Not for agencies specifically needing white-label sub-accounts and client-reseller billing. For a solo creator's own funnel, email, and course stack, Systeme.io covers similar core functionality with a simpler commission structure — 60% recurring (verified 2026-07-22) versus GoHighLevel's 40% + 5% approval-gated tier.</p>
+  </div>
+  <div class="faq-item">
+    <h3>How does GoHighLevel's second-tier commission work?</h3>
+    <p>GoHighLevel pays a 40% recurring base commission plus a 5% second-tier override, but the second tier requires HighLevel's approval (verified 2026-07-22) — it isn't automatic the way Systeme.io's or GetResponse's base rate is.</p>
+  </div>
+  <div class="faq-item">
+    <h3>What is the 45-day requirement mentioned for GoHighLevel?</h3>
+    <p>GoHighLevel requires 45 days of active, good-standing referral status before a commission qualifies for payout (verified 2026-07-22). Systeme.io and GetResponse don't carry that same qualification period in their verified terms.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does GetResponse offer agency-style features like GoHighLevel?</h3>
+    <p>No. GetResponse is primarily an email marketing and automation platform. It's a reasonable alternative for creators who want a trusted, established platform, but it doesn't replicate GoHighLevel's white-label, sub-account architecture for agencies.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which alternative has the longer tracking window?</h3>
+    <p>Systeme.io's 1-year attribution window (verified 2026-07-22) is longer than both GoHighLevel's and GetResponse's 90-day cookie (verified 2026-07-22) — though, as noted elsewhere, "attribution window" and "cookie" describe related but not identical tracking mechanics.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/gohighlevel-pricing/">GoHighLevel pricing: verified plans, costs, and affiliate economics</a></li>
+    <li><a href="/compare/systeme-io-vs-getresponse/">Systeme.io vs. GetResponse: full head-to-head</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

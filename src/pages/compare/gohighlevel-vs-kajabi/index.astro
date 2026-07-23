@@ -1,0 +1,202 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/compare/gohighlevel-vs-kajabi/';
+
+// JSON-LD originally authored in /20_content/spokes/gohighlevel-vs-kajabi.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+//
+// IMPORTANT: StackCompass has no affiliate program/link with Kajabi. Kajabi is
+// discussed here informationally only — there is no /go/kajabi/ stub and no
+// CtaButton for Kajabi anywhere on this page. Only GoHighLevel gets an
+// affiliate CTA on this page. Do not add a Kajabi affiliate link without a
+// real, verified tracking URL and an update to src/data/go-links.json.
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "GoHighLevel vs. Kajabi: Agency CRM vs. Course Platform, Compared",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'GoHighLevel vs. Kajabi', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Is GoHighLevel or Kajabi better for course creators?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Kajabi is purpose-built for course and membership delivery. GoHighLevel can host funnels and some course-style content, but its core strength is CRM and multi-client agency operations, not standalone course sales."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is GoHighLevel or Kajabi better for agencies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel, because of its sub-account structure and white-label branding built for managing multiple clients under one agency account. Kajabi does not offer an equivalent multi-client architecture."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which affiliate program pays more?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on the referral and time horizon. Kajabi's entry bounty can reach 100% of a first month's payment, while GoHighLevel's 40% recurring plus a 5% approval-gated second tier compounds over a longer relationship (verified 2026-07-22). Neither structure is directly comparable without knowing referral volume, plan tier, and retention. StackCompass does not currently have a tracked affiliate relationship with Kajabi."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can anyone join Kajabi's affiliate program?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Kajabi requires affiliates to be paying customers of the platform before joining its affiliate program (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does GoHighLevel have a free plan?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No free plan is referenced here. GoHighLevel offers a 14-day free trial instead (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which platform has the longer cookie window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel's 90-day cookie is longer than Kajabi's 30-day cookie (both verified 2026-07-22)."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="GoHighLevel vs. Kajabi"
+  description="GoHighLevel and Kajabi compared: agency CRM/funnel platform vs. course and membership platform, plus affiliate program terms — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="compare"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>GoHighLevel vs. Kajabi: Agency CRM vs. Course Platform, Compared</h1>
+
+  <div class="lede">
+    <p>GoHighLevel and Kajabi are not direct competitors — they solve different problems. GoHighLevel is an all-in-one CRM, funnel, and white-label platform built for agencies managing multiple client accounts, with published plans at $97/mo (Starter), $297/mo (Unlimited), and $497/mo (Agency Pro), plus a custom-quote Enterprise tier (verified 2026-07-22, gohighlevel.com/pricing). Kajabi is a course, membership, and coaching platform built around content delivery and audience monetization for a single creator's own offers. Their affiliate programs reflect the same split: GoHighLevel pays 40% recurring commission plus an approval-gated 5% second tier on a 90-day cookie (verified 2026-07-22), while Kajabi pays a tiered structure that can reach up to 100% of the first month's payment as an entry-level bounty and up to 20% recurring at its higher affiliate tiers, on a 30-day cookie (verified 2026-07-22). Choosing between the two products should be driven by whether the buyer needs multi-client agency infrastructure or a course/membership storefront — not by commission rate alone.</p>
+  </div>
+
+  <div class="cta-block">
+    <CtaButton program="gohighlevel" label="Start a GoHighLevel free trial →" name="GoHighLevel" />
+  </div>
+  <div class="callout amber">
+    <p><strong>About Kajabi on this page:</strong> Kajabi is discussed below for comparison purposes only. StackCompass does not have an affiliate link or tracked partnership with Kajabi — mentions of Kajabi here are informational, not promotional, and there is no outbound Kajabi link on this site.</p>
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th></th><th>GoHighLevel</th><th>Kajabi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Commission</td><td>40% recurring + 5% second-tier, requires HighLevel approval (verified 2026-07-22)</td><td>Tiered: up to 100% first-month bounty at entry, up to 20% recurring at higher tiers (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day (verified 2026-07-22)</td><td>30-day (verified 2026-07-22)</td></tr>
+        <tr><td>Qualification</td><td>45-day active, good-standing period required before a commission qualifies (verified 2026-07-22)</td><td>Affiliate must be a paying Kajabi customer to join the program (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor-direct</td><td>Vendor-direct</td></tr>
+        <tr><td>Plan pricing</td><td>Starter $97/mo, Unlimited $297/mo, Agency Pro $497/mo, Enterprise custom quote (verified 2026-07-22, gohighlevel.com/pricing); 14-day free trial</td><td><span class="todo">Kajabi plan price — verify before publish</span></td></tr>
+        <tr><td>Program link on this site</td><td><a href="/go/gohighlevel/">Start with GoHighLevel →</a></td><td>No affiliate link — informational reference only</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This comparison is for:</strong></p>
+  <ul>
+    <li>Readers deciding between an agency-oriented CRM/funnel platform and a course/membership platform for their own business</li>
+    <li>Agency owners or consultants evaluating GoHighLevel who also run (or are considering) a course/coaching offer under Kajabi</li>
+    <li>Affiliate marketers weighing an approval-gated recurring commission against a front-loaded bounty-plus-tiered-recurring structure</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers expecting a feature-for-feature "which is better" verdict — GoHighLevel and Kajabi target different core jobs (agency/client management vs. content/course delivery), so most of the meaningful differences come down to fit, not superiority</li>
+    <li>Anyone who is not already a paying Kajabi customer and wants to join its affiliate program immediately — that program carries a customer-status requirement (verified 2026-07-22)</li>
+  </ul>
+
+  <h2>Comparison</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>GoHighLevel</th><th>Kajabi</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core focus</td><td>CRM, sales funnels, sub-accounts, white-label agency tooling</td><td>Online courses, memberships, coaching, and a marketing site builder</td></tr>
+        <tr><td>Target user</td><td>Marketing agencies and consultants managing multiple client accounts</td><td>Course creators and coaches selling their own content</td></tr>
+        <tr><td>Entry pricing</td><td>$97/mo Starter plan (verified 2026-07-22, gohighlevel.com/pricing)</td><td><span class="todo">Kajabi plan price — verify before publish</span></td></tr>
+        <tr><td>Trial / entry offer</td><td>14-day free trial (verified 2026-07-22)</td><td>No free plan referenced here</td></tr>
+        <tr><td>Affiliate commission</td><td>40% recurring + 5% second tier, approval-gated (verified 2026-07-22)</td><td>Up to 100% first-month bounty, up to 20% recurring at top tiers (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie window</td><td>90-day (verified 2026-07-22)</td><td>30-day (verified 2026-07-22)</td></tr>
+        <tr><td>Affiliate eligibility</td><td>Vendor-direct partner program</td><td>Must already be a paying Kajabi customer (verified 2026-07-22); no tracked link on this site</td></tr>
+        <tr><td>Best-fit audience</td><td>Agencies reselling marketing services to multiple clients</td><td>Individual creators monetizing courses or coaching directly</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Is GoHighLevel or Kajabi better for course creators?</h3>
+    <p>Kajabi is purpose-built for course and membership delivery. GoHighLevel can host funnels and some course-style content, but its core strength is CRM and multi-client agency operations, not standalone course sales.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is GoHighLevel or Kajabi better for agencies?</h3>
+    <p>GoHighLevel, because of its sub-account structure and white-label branding built for managing multiple clients under one agency account. Kajabi does not offer an equivalent multi-client architecture.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which affiliate program pays more?</h3>
+    <p>It depends on the referral and time horizon. Kajabi's entry bounty can reach 100% of a first month's payment, while GoHighLevel's 40% recurring plus a 5% approval-gated second tier compounds over a longer relationship (verified 2026-07-22). Neither structure is directly comparable without knowing referral volume, plan tier, and retention — and StackCompass does not currently have a tracked affiliate relationship with Kajabi, so this is a factual comparison, not a recommendation to join either program.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can anyone join Kajabi's affiliate program?</h3>
+    <p>No. Kajabi requires affiliates to be paying customers of the platform before joining its affiliate program (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Does GoHighLevel have a free plan?</h3>
+    <p>No free plan is referenced here. GoHighLevel offers a 14-day free trial instead (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which platform has the longer cookie window?</h3>
+    <p>GoHighLevel's 90-day cookie (verified 2026-07-22) is longer than Kajabi's 30-day cookie (verified 2026-07-22).</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/compare/gohighlevel-vs-getresponse/">GoHighLevel vs. GetResponse: full head-to-head</a></li>
+    <li><a href="/gohighlevel-pricing/">GoHighLevel pricing: verified plans, costs, and affiliate economics</a></li>
+    <li><a href="/alternatives/gohighlevel/">GoHighLevel alternatives for creators and agencies</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

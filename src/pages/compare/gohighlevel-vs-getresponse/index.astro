@@ -1,0 +1,194 @@
+---
+import Layout from '../../../layouts/Layout.astro';
+import CtaButton from '../../../components/CtaButton.astro';
+import { SITE_URL, LAST_VERIFIED_DATE, breadcrumbJsonLd } from '../../../config';
+
+const SLUG = '/compare/gohighlevel-vs-getresponse/';
+
+// JSON-LD originally authored in /20_content/spokes/gohighlevel-vs-getresponse.md.
+// Placeholders resolved against src/config.ts SITE_URL + this page's slug;
+// datePublished/dateModified set to the last verification pass (2026-07-22).
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "GoHighLevel vs. GetResponse: Which Fits Your Marketing Stack?",
+      "author": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "StackCompass",
+        "url": SITE_URL
+      },
+      "datePublished": LAST_VERIFIED_DATE,
+      "dateModified": LAST_VERIFIED_DATE,
+      "url": `${SITE_URL}${SLUG}`,
+      "mainEntityOfPage": `${SITE_URL}${SLUG}`
+    },
+    breadcrumbJsonLd([
+      { name: 'Home', path: '/' },
+      { name: 'GoHighLevel vs. GetResponse', path: SLUG },
+    ]),
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Which tool should a solo creator pick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GetResponse is typically the better fit for a solo creator focused on email marketing, unless the reader specifically needs agency or sub-account features."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which tool should an agency pick?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "GoHighLevel, due to its white-label, multi-client sub-account structure, which GetResponse does not offer."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which affiliate program pays more?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "It depends on volume and referral longevity. GoHighLevel has no stated payout cap but gates its second commission tier behind approval (verified 2026-07-22), while GetResponse can reach 60% at its top volume tier but stops paying on any single referral after 12 months (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do both programs use the same cookie window?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes — both use a 90-day cookie (verified 2026-07-22), though they are tracked through different networks: GoHighLevel is vendor-direct and GetResponse runs through PartnerStack."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is GetResponse's recurring commission lifetime?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It is capped at 12 months per referral (verified 2026-07-22)."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can these two tools be used together?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Some agencies use GoHighLevel for client CRM and funnel management while using GetResponse for a specific client's email program, though there is overlap in automation features between the two."
+          }
+        }
+      ]
+    }
+  ]
+};
+---
+<Layout
+  title="GoHighLevel vs. GetResponse"
+  description="Affiliate program comparison for agencies and creators: commission structure, cookie window, and network for GoHighLevel and GetResponse — verified 2026-07-22."
+  jsonLd={jsonLd}
+  activeNav="compare"
+  slug={SLUG}
+  ogType="article"
+>
+  <h1>GoHighLevel vs. GetResponse: Which Fits Your Marketing Stack?</h1>
+
+  <div class="lede">
+    <p>GoHighLevel and GetResponse serve different primary needs. GoHighLevel is an all-in-one CRM, funnel, and white-label platform built for agencies managing multiple clients, priced at $97/month (Starter), $297/month (Unlimited), and $497/month (Agency Pro), with a custom-quote Enterprise tier (verified 2026-07-22, gohighlevel.com/pricing). GetResponse is primarily an email marketing and automation platform with funnel features layered on top, aimed at individual creators and small businesses rather than multi-client agencies. On the affiliate side, GoHighLevel pays 40% recurring commission plus an approval-gated 5% second tier on a 90-day cookie (verified 2026-07-22), while GetResponse pays a tiered 40% → 50% → 60% recurring commission capped at 12 months per referral, also on a 90-day cookie, through PartnerStack (verified 2026-07-22). Readers choosing between the two products should weigh agency/client-management needs against email deliverability and automation maturity, rather than commission rate alone.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.75rem;margin-bottom:1.5rem;">
+    <CtaButton program="gohighlevel" label="Start a GoHighLevel free trial →" name="GoHighLevel" />
+    <CtaButton program="getresponse" label="Try GetResponse →" name="GetResponse" />
+  </div>
+
+  <h2>Verified facts table</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th></th><th>GoHighLevel</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Commission</td><td>40% recurring + 5% second-tier, requires HighLevel approval (verified 2026-07-22)</td><td>40% → 50% → 60% recurring, tiered by volume (verified 2026-07-22)</td></tr>
+        <tr><td>Cap / duration</td><td>No stated recurring-payout cap; 45-day active good-standing qualification period (verified 2026-07-22)</td><td>Capped at 12 months per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day (verified 2026-07-22)</td><td>90-day (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor-direct</td><td>PartnerStack (verified 2026-07-22)</td></tr>
+        <tr><td>Plan pricing</td><td>Starter $97/mo, Unlimited $297/mo, Agency Pro $497/mo, Enterprise custom quote (verified 2026-07-22, gohighlevel.com/pricing); 14-day free trial</td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>Who this is for / not for</h2>
+  <p><strong>This comparison is for:</strong></p>
+  <ul>
+    <li>Readers comparing an agency-oriented CRM/funnel platform against an established email marketing platform</li>
+    <li>Agency owners evaluating GoHighLevel who want to understand how it differs from a more email-centric alternative</li>
+    <li>Affiliate marketers weighing a no-stated-cap, approval-gated commission structure against a tiered, time-capped one on the same cookie length</li>
+  </ul>
+  <p><strong>Not for:</strong></p>
+  <ul>
+    <li>Readers wanting a pure email-marketing-only comparison — see the <a href="/compare/kit-vs-getresponse/">Kit vs. GetResponse</a> page for that</li>
+    <li>Readers wanting a pure agency-CRM comparison — GetResponse is not built as a white-label, multi-client agency tool</li>
+  </ul>
+
+  <h2>Comparison</h2>
+  <div class="table-scroll">
+    <table>
+      <thead>
+        <tr><th>Dimension</th><th>GoHighLevel</th><th>GetResponse</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Core focus</td><td>CRM, sales funnels, sub-accounts, white-label agency tooling</td><td>Email marketing and automation, with funnel features</td></tr>
+        <tr><td>Target user</td><td>Agencies and consultants managing multiple clients</td><td>Individual creators, small businesses, solo marketers</td></tr>
+        <tr><td>Entry pricing</td><td>$97/mo Starter plan (verified 2026-07-22, gohighlevel.com/pricing)</td><td><span class="todo">GetResponse plan price — verify before publish</span></td></tr>
+        <tr><td>Trial / entry offer</td><td>14-day free trial (verified 2026-07-22)</td><td>Not referenced here</td></tr>
+        <tr><td>Affiliate commission</td><td>40% recurring + 5% second tier, approval-gated (verified 2026-07-22)</td><td>40% → 50% → 60% recurring, tiered by volume (verified 2026-07-22)</td></tr>
+        <tr><td>Commission duration</td><td>No stated cap; 45-day qualification period (verified 2026-07-22)</td><td>Capped at 12 months per referral (verified 2026-07-22)</td></tr>
+        <tr><td>Cookie</td><td>90-day (verified 2026-07-22)</td><td>90-day (verified 2026-07-22)</td></tr>
+        <tr><td>Network</td><td>Vendor-direct</td><td>PartnerStack (verified 2026-07-22)</td></tr>
+        <tr><td>Best-fit audience</td><td>Agencies reselling services to multiple clients</td><td>Creators prioritizing email deliverability and automation</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2>FAQ</h2>
+  <div class="faq-item">
+    <h3>Which tool should a solo creator pick?</h3>
+    <p>GetResponse is typically the better fit for a solo creator focused on email marketing, unless the reader specifically needs agency or sub-account features.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which tool should an agency pick?</h3>
+    <p>GoHighLevel, due to its white-label, multi-client sub-account structure, which GetResponse does not offer.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Which affiliate program pays more?</h3>
+    <p>It depends on volume and referral longevity. GoHighLevel has no stated payout cap but gates its second commission tier behind approval (verified 2026-07-22), while GetResponse can reach 60% at its top volume tier but stops paying on any single referral after 12 months (verified 2026-07-22).</p>
+  </div>
+  <div class="faq-item">
+    <h3>Do both programs use the same cookie window?</h3>
+    <p>Yes — both use a 90-day cookie (verified 2026-07-22), though they are tracked through different networks: GoHighLevel is vendor-direct and GetResponse runs through PartnerStack.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Is GetResponse's recurring commission lifetime?</h3>
+    <p>No. It is capped at 12 months per referral (verified 2026-07-22). This page avoids "lifetime" framing because it is not accurate.</p>
+  </div>
+  <div class="faq-item">
+    <h3>Can these two tools be used together?</h3>
+    <p>Some agencies use GoHighLevel for client CRM and funnel management while using GetResponse for a specific client's email program, though there is overlap in automation features between the two.</p>
+  </div>
+
+  <h2>Related</h2>
+  <ul>
+    <li><a href="/">← Back to the full marketing-stack comparison hub</a></li>
+    <li><a href="/compare/gohighlevel-vs-kajabi/">GoHighLevel vs. Kajabi: agency CRM vs. course platform</a></li>
+    <li><a href="/compare/kit-vs-getresponse/">Kit vs. GetResponse: email marketing affiliate program comparison</a></li>
+    <li><a href="/alternatives/gohighlevel/">Looking for a lighter-weight tool instead? See GoHighLevel alternatives</a></li>
+    <li><a href="/tools/which-tool-fits-me/">Not sure yet? Take the "which tool fits me?" quiz</a></li>
+  </ul>
+</Layout>

@@ -1,0 +1,10 @@
+# Netlify build config for the StackCompass Astro site.
+# Cloudflare Pages does not need this file — set the same values in its dashboard
+# (build command: npm run build · output dir: dist · framework preset: Astro).
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"

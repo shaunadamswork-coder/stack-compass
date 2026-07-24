@@ -85,7 +85,7 @@ const orgWebsiteJsonLd = {
   {jsonLdBlocks.map((block) => (
     <script type="application/ld+json" set:html={JSON.stringify(block)} />
   ))}
-  <style>
+  <style is:global>
     :root {
       --bg: #f4f5f7;
       --surface: #ffffff;
